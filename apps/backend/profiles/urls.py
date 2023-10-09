@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import *
 
-app_name = 'apikey'
+app_name = 'profile'
 urlpatterns = [
     path('', Index.as_view(), name='index'),
     path('create/', Create.as_view(), name='create'),

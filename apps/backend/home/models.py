@@ -2,15 +2,16 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
-# Create your models here.
-class Home(models.Model):
-    model = models.CharField(_('Model Name'), max_length=200, editable=False)
-    value = models.CharField(_('Today\'s Data'), max_length=200, editable=False)
-    created = models.DateTimeField(_('created'), auto_now_add=True)
+class Config(models.Model):
+    label = models.CharField(_("label"), max_length=200, blank=True, null=True)
+    type = models.CharField(_("type"), max_length=200, blank=True, null=True)
+    value = models.TextField(_("value"), blank=True, null=True)
+    detail = models.JSONField(_("detail"), blank=True, null=True)
+    status = models.BooleanField(_('Status'), default=True)
 
     def __str__(self):
-        return self.model
+        return self.label
 
     class Meta:
-        db_table = 'homes'
-        verbose_name_plural = 'Home'
+        db_table = 'configs'
+        verbose_name_plural = 'Config'

@@ -1,8 +1,8 @@
 {% extends 'backend/layouts/master.html' %}
 
 {% block breadcrumb %}
-    {% url 'apikey:index' as the_url %}
-    {% include 'backend/layouts/breadcrumb.html' with title="Api Key" formPage=True route=the_url %}
+    {% url 'resume:education.index' as the_url %}
+    {% include 'backend/layouts/breadcrumb.html' with title="Education" formPage=True route=the_url %}
 {% endblock %}
 
 
@@ -32,6 +32,8 @@
                                                             {{ form.status }}
                                                             <label for="id_status">Active</label>
                                                         </div>
+                                                    {% elif field.html_name == 'value' %}
+                                                        {{ form.value }}
                                                     {% else %}
                                                         <input type="{{ field.field.widget.input_type }}"
                                                                name="{{ field.html_name }}"
@@ -54,7 +56,7 @@
                                                 <button type="submit" class="btn btn-primary px-4">
                                                     <i class="fa fa-plus-square"></i> Submit
                                                 </button>
-                                                <a href="{% url 'apikey:index' %}"
+                                                <a href="{% url 'resume:education.index' %}"
                                                    class="btn btn-secondary">
                                                     <i class="fa fa-arrow-left"></i> Back
                                                 </a>

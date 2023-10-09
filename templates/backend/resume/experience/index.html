@@ -1,0 +1,69 @@
+{% extends 'backend/layouts/master.html' %}
+{% load static %}
+
+
+{% block breadcrumb %}
+    {% url 'resume:experience.index' as the_url %}
+    {% include 'backend/layouts/breadcrumb.html' with title="Experience" formPage=False route=the_url %}
+{% endblock %}
+
+
+{% block content %}
+    <div class="content-display clearfix">
+        {% include 'backend/layouts/partials/search.html' %}
+        <div class="panel">
+            <div class="panel-box">
+                <div class="table-responsive mt-3">
+                    <div class="card custom-card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered" id="forDataTable">
+                                    <caption></caption>
+
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">S.N</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">value</th>
+                                        <th scope="col">Position</th>
+                                        <th scope="col">status</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for apikey in object_list %}
+                                        <tr>
+                                            <td>{{ forloop.counter }} </td>
+                                            <td>{{ apikey.label }} </td>
+                                            <td title="{{ apikey.value }}">{{ apikey.value|truncatewords_html:30 }} </td>
+                                            <td>
+                                                <span class="badge badge-warning ">
+                                                {{ apikey.position }}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span class="badge {% if apikey.status %} badge-success {% else %} badge-danger {% endif %}">
+                                                {{ apikey.status }}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <a href="{% url 'resume:experience.update' apikey.id %}">
+                                                    <button class="btn btn-primary"> Update</button>
+                                                </a>
+                                                <a href="{% url 'resume:experience.delete' apikey.id %}">
+                                                    <button class="btn btn-danger"> Delete</button>
+                                                </a>
+                                            </td>
+
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- panel -->
+    </div>
+{% endblock %}

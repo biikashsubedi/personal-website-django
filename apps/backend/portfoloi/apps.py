@@ -3,4 +3,4 @@ from django.apps import AppConfig
 
 class PortfoloiConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "portfoloi"
+    name = "apps.backend.portfoloi"

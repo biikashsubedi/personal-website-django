@@ -5,10 +5,15 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+
+    # backend
     path('', include('apps.backend.user.urls')),
-
     path('home/', include('apps.backend.home.urls')),
+    path('portfolio/', include('apps.backend.portfoloi.urls')),
+    path('profiles/', include('apps.backend.profiles.urls')),
+    path('', include('apps.backend.resume.urls')),
 
+    # frontend
     path('', include('apps.frontend.home.urls')),
 ]
 

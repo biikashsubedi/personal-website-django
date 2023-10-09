@@ -1,0 +1,73 @@
+{% extends 'backend/layouts/master.html' %}
+{% load static %}
+
+
+{% block breadcrumb %}
+    {% url 'profile:index' as the_url %}
+    {% include 'backend/layouts/breadcrumb.html' with title="Profile" formPage=False route=the_url %}
+{% endblock %}
+
+
+{% block content %}
+    <div class="content-display clearfix">
+        {% include 'backend/layouts/partials/search.html' %}
+        <div class="panel">
+            <div class="panel-box">
+                <div class="table-responsive mt-3">
+                    <div class="card custom-card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered" id="forDataTable">
+                                    <caption></caption>
+
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">S.N</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Image</th>
+                                        <th scope="col">Phone1</th>
+                                        <th scope="col">Phone2</th>
+                                        <th scope="col">Email1</th>
+                                        <th scope="col">Email2</th>
+                                        <th scope="col">status</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for obj in object_list %}
+                                        <tr>
+                                            <td>{{ forloop.counter }} </td>
+                                            <td>{{ obj.name|title }} </td>
+                                            <td>
+                                                <img src="{{ obj.image.url }}" alt="Profile Image" height="50" width="50">
+                                            </td>
+                                            <td>{{ obj.phone1 }} </td>
+                                            <td>{{ obj.phone2 }} </td>
+                                            <td>{{ obj.email1 }} </td>
+                                            <td>{{ obj.email2 }} </td>
+                                            <td>
+                                                <span class="badge {% if obj.status %} badge-success {% else %} badge-danger {% endif %}">
+                                                {{ obj.status }}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <a href="{% url 'profile:update' obj.id %}">
+                                                    <button class="btn btn-primary"> Update</button>
+                                                </a>
+                                                <a href="{% url 'profile:delete' obj.id %}">
+                                                    <button class="btn btn-danger"> Delete</button>
+                                                </a>
+                                            </td>
+
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- panel -->
+    </div>
+{% endblock %}
