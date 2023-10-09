@@ -1,0 +1,35 @@
+{% load static %}
+<!doctype html>
+<html lang="en" class="no-js">
+
+<head>
+    {% include 'frontend/layouts/header.html' %}
+</head>
+<body>
+
+{% include 'frontend/layouts/loader.html' %}
+
+<div class="home-page">
+    {% include 'frontend/layouts/introduction.html' %}
+    {% include 'frontend/layouts/navigationMenu.html' %}
+</div>
+
+<div class="close-btn"></div>
+
+{% include 'frontend/layouts/profile.html' %}
+{% include 'frontend/layouts/resume.html' %}
+{% include 'frontend/layouts/portfolio.html' %}
+{% include 'frontend/layouts/contact.html' %}
+
+<script type="text/javascript" src="{% static 'frontend/js/jquery-1.11.3.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'frontend/library/jquery-easing/jquery.easing.min.js' %}"></script>
+<script>
+    window.viewportUnitsBuggyfill.init({
+        refreshDebounceWait: 50,
+        hacks: window.viewportUnitsBuggyfillHacks
+    });
+</script>
+<script type="text/javascript" src="{% static 'frontend/js/script.js' %}"></script>
+</body>
+
+</html>

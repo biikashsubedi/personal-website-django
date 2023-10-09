@@ -1,0 +1,52 @@
+<div class="col-md-12 col-xl-12">
+    <div class="card custom-card overflow-hidden" style="max-height: 310px;">
+        <div class="card-header border-bottom-0 d-flex">
+            <div>
+                <label class="main-content-label mb-2 pt-1">Active Users</label>
+            </div>
+            <div class="ml-auto"> <!-- Add ml-auto to push the select element to the right -->
+                <select class="form-control" name="" id="">
+                    <option selected>Minutes</option>
+                    <option>Hours</option>
+                    <option>Day</option>
+                    <option>All</option>
+                </select>
+            </div>
+        </div>
+        <div class="chart-container">
+            <canvas id="activeUsersChart" height="50"></canvas>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var ctx = document.getElementById('activeUsersChart').getContext('2d');
+
+    // Get data for the last 5 minutes
+    var minuteCounts = JSON.parse("{{ activeUsers|safe }}");
+
+    var data = {
+        labels: ['Last 5 Minutes', 'Last 4 Minutes', 'Last 3 Minutes', 'Last 2 Minutes', 'Last 1 Minute'],
+        datasets: [{
+            label: 'Active Users',
+            data: minuteCounts,
+            borderColor: 'rgb(239,9,132)',
+            borderWidth: 2,
+            fill: false
+        }]
+    };
+
+    var chart = new Chart(ctx, {
+        type: 'line',
+        data: data,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+

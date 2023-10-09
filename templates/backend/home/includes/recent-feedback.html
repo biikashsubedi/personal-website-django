@@ -1,0 +1,73 @@
+<div class="col-md-12 col-xl-8">
+    <div class="card custom-card overflow-hidden" style="max-height: 400px !important; height: 400px">
+        <div class="card-header border-bottom-0 d-flex">
+            <div>
+                <label class="main-content-label mb-2 pt-1">Recent Feedbacks</label>
+                <p class="tx-12 mb-3 text-muted">The details displayed the feedback received form apps (apps that
+                    developed by Ashish, who is known for his exceptional coding skills and innovative ideas.)</p>
+            </div>
+            <div class="card-options float-right">
+                <a href="" class="mr-0 text-default" data-toggle="dropdown" role="button" aria-haspopup="true"
+                   aria-expanded="true"> <span class="fe fe-more-vertical tx-17 float-right"></span> </a>
+                <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                    <li><a href="{% url 'feedback:index' %}"><i class="fe fe-eye mr-2"></i>Show More</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="card-body pt-0">
+            <div class="table-responsive" style="height: 300px; overflow-y: auto;">
+                <table class="table table-vcenter border mb-0 text-nowrap">
+                    <thead>
+                    <tr style="background: #efefff">
+                        <th scope="col">S.N</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Rating</th>
+                        <th scope="col">Message</th>
+                        <th scope="col">Created On</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for object in feedbacks %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>
+                                {{ object.name|title }}
+                            </td>
+                            <style>
+                                /* Add a class for truncation */
+                                .truncate-text {
+                                    max-width: 300px;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                    white-space: break-spaces;
+                                }
+                            </style>
+
+                            <td>{{ object.email }}</td>
+                            <td>{{ object.title }}</td>
+                            <td>{{ object.rating }}</td>
+
+                            {% if object.message|length > 200 %} ... {% endif %}
+
+                            <td class="truncate-text" title="{{ object.message }}">
+                                {{ object.message|slice:":150" }}{% if object.message|length > 150 %}...{% endif %}</td>
+
+                            <td>
+                                {{ object.created_at|date:"d M, h:i A"|default:"N/A" }}
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="100%"
+                                class="text-center">No Data Available
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

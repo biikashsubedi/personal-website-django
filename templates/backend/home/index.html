@@ -1,0 +1,30 @@
+{% extends 'backend/layouts/master.html' %}
+{% load static %}
+
+
+{% block styles %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+{% block breadcrumb %}
+    <link rel="stylesheet" href="{% static 'backend/assets/css/home.css' %}">
+    {% include 'backend/home/includes/search.html' %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="row row-sm font-family-mullish">
+        <div class="col-sm-12 col-lg-12 col-xl-12">
+            {% include 'backend/home/includes/sales-and-user.html' %}
+            {% include 'backend/home/includes/status-wise-orders-report.blade.html' %}
+        </div>
+{#        {% include 'backend/home/includes/active-user.html' %}#}
+{#        {% include 'backend/home/includes/api-analyst.html' %}#}
+{#        {% include 'backend/home/includes/most-used-apis.html' %}#}
+{#        {% include 'backend/home/includes/recent-feedback.html' %}#}
+{#        {% include 'backend/home/includes/most-used-apis-by_user.html' %}#}
+
+{#        {% include 'backend/home/includes/quiz-report.html' %}#}
+{#        {% include 'backend/home/includes/device-report.html' %}#}
+    </div>
+{% endblock %}

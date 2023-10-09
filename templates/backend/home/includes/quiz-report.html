@@ -1,0 +1,60 @@
+<style>
+    .chart-container {
+        width: auto;
+        height: 500px;
+        padding: 0;
+        margin: 0;
+        position: relative;
+        margin-left: 15px;
+        margin-bottom: 15px;
+        margin-right: 15px;
+    }
+</style>
+
+
+<div class="col-md-12 col-xl-8">
+    <div class="card custom-card overflow-hidden">
+        <div class="card-header border-bottom-0 d-flex">
+            <div>
+                <label class="main-content-label mb-2 pt-1">Quiz Analytics</label>
+            </div>
+        </div>
+        <div class="chart-container">
+            <canvas id="barChartQuiz"></canvas>
+        </div>
+    </div>
+</div>
+
+
+{#<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>#}
+<script>
+    function renderBarChartQuiz() {
+        var ctx = document.getElementById('barChartQuiz').getContext('2d');
+        var data = {
+            labels: ['Total Quiz', 'Total Quiz Started', 'Total Quiz Completed', 'Total Quiz Abandoned'],
+            datasets: [{
+                label: 'Used',
+                data: [{{ totalQuiz }}, 1000, 800, 200],
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        var options = {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        };
+        new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: options
+        });
+    }
+
+    renderBarChartQuiz();
+</script>
+

@@ -1,0 +1,65 @@
+{% extends 'backend/layouts/master.html' %}
+{% load static %}
+
+
+{% block breadcrumb %}
+    {% url 'apikey:index' as the_url %}
+    {% include 'backend/layouts/breadcrumb.html' with title="Api Key" formPage=False route=the_url %}
+{% endblock %}
+
+
+{% block content %}
+    <div class="content-display clearfix">
+        {% include 'backend/layouts/partials/search.html' %}
+        <div class="panel">
+            <div class="panel-box">
+                <div class="table-responsive mt-3">
+                    <div class="card custom-card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered" id="forDataTable">
+                                    <caption></caption>
+
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">S.N</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Key</th>
+                                        <th scope="col">Hits</th>
+                                        <th scope="col">status</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for apikey in object_list %}
+                                        <tr>
+                                            <td>{{ forloop.counter }} </td>
+                                            <td>{{ apikey.title }} </td>
+                                            <td>{{ apikey.key }} </td>
+                                            <td>{{ apikey.hits }} </td>
+                                            <td>
+                                                <span class="badge {% if apikey.status %} badge-success {% else %} badge-danger {% endif %}">
+                                                {{ apikey.status }}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <a href="{% url 'apikey:update' apikey.id %}">
+                                                    <button class="btn btn-primary"> Update</button>
+                                                </a>
+                                                <a href="{% url 'apikey:delete' apikey.id %}">
+                                                    <button class="btn btn-danger"> Delete</button>
+                                                </a>
+                                            </td>
+
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- panel -->
+    </div>
+{% endblock %}

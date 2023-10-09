@@ -1,0 +1,21 @@
+<form method="get" action="" class="mb-2">
+    <div class="form-row align-items-center float-right" style="margin-right: 5px">
+        {% if samanyagyamCategoryOnlyParent %}
+            <div class="col-auto mb-2">
+                <select name="parent" class="form-control">
+                    <option value="0" {% if request.GET.parent == '0' %} selected {% endif %}>All Category</option>
+                    <option value="1" {% if request.GET.parent == '1' %} selected {% endif %}>Only Parent</option>
+                </select>
+            </div>
+
+        {% endif %}
+        <div class="col-auto mb-2" id="">
+            <label class="sr-only" for="keyword">Search keyword</label>
+            <input onkeydown="" type="text" class="form-control  " value="" placeholder="Search Keyword"
+                   name="keyword" id="keyword" maxlength="25" autocomplete="nope">
+        </div>
+        <div class="form-row align-items-center">
+            <button class="btn btn-primary mb-2 ml-2" type="submit"><em class="fas fa-search"></em> Go</button>
+        </div>
+    </div>
+</form>

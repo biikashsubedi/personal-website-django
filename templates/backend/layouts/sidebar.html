@@ -1,0 +1,41 @@
+{% load static %}
+
+<!-- Sidemenu -->
+<div class="main-sidebar main-sidebar-sticky side-menu">
+    <div class="sidemenu-logo">
+        <a class="main-logo" href="">
+            <img src="{% static 'backend/assets/img/logo-big-lok-sewa.png' %}" class="header-brand-img desktop-logo"
+                 alt="logo" width="100" height="40">
+            <img src="{% static 'backend/assets/img/logo-small-lok-sewa.png' %}" class="header-brand-img icon-logo"
+                 alt="logo" width="100" height="40">
+            <img src="{% static 'backend/assets/img/logo-big-lok-sewa.png' %}"
+                 class="header-brand-img desktop-logo theme-logo" alt="logo" width="100" height="40">
+            <img src="{% static 'backend/assets/img/logo-big-lok-sewa.png' %}"
+                 class="header-brand-img icon-logo theme-logo" alt="logo" width="100" height="40">
+        </a>
+    </div>
+    <div class="main-sidebar-body">
+        <ul class="nav">
+
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'home:index' %}">
+                    <span class="shape1"></span>
+                    <span class="shape2"></span>
+                    <i class='sidemenu-icon ti-home'></i>
+                    <span class="sidemenu-label">Dashboard</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'user.index' %}">
+                    <span class="shape1"></span>
+                    <span class="shape2"></span>
+                    <i class='sidemenu-icon ti-user'></i>
+                    <span class="sidemenu-label">Users</span></a>
+            </li>
+
+
+        </ul>
+    </div>
+</div>
+<!-- End Sidemenu -->

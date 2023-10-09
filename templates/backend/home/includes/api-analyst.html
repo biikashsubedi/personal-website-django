@@ -1,0 +1,68 @@
+<style>
+    .chart-container {
+        width: auto;
+        height: 500px; /* Allow the height to adjust automatically */
+        padding: 0;
+        margin: 0;
+        position: relative;
+        margin-left: 15px;
+        margin-bottom: 15px;
+        margin-right: 15px;
+    }
+</style>
+
+
+<div class="col-md-12 col-xl-8">
+    <div class="card custom-card overflow-hidden">
+        <div class="card-header border-bottom-0 d-flex">
+            <div>
+                <label class="main-content-label mb-2 pt-1">Api Analytics</label>
+            </div>
+        </div>
+        <div class="chart-container">
+            <canvas id="barChart"></canvas>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    function getRandomColor() {
+        return '#' + Math.floor(Math.random() * 16777215).toString(16);
+    }
+
+    function renderBarChart() {
+        var ctx = document.getElementById('barChart').getContext('2d');
+        var uniqueCities = {{ uniqueCities|safe }};
+
+        var data = {
+            labels: uniqueCities.map(item => item.city),
+            datasets: [{
+                label: 'Hits Count',
+                data: uniqueCities.map(item => item.hits_count),
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        var options = {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        };
+
+        var barChart = new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: options
+        });
+    }
+
+    // Call the function to render the bar chart
+    renderBarChart();
+</script>
+

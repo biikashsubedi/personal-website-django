@@ -1,0 +1,106 @@
+{% extends 'backend/auth/app.html' %}
+
+
+{% load static %}
+
+{% block scripts %}
+    <style>
+        .not-visible {
+            display: none;
+        }
+
+        .is-invalid {
+            border: 1px solid red; /* Add any visual indication for invalid input */
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+            text-align: center;
+        }
+    </style>
+    <script src="{% static 'backend/assets/js/login.js' %}" defer></script>
+{% endblock scripts %}
+
+{% block content %}
+
+    <style>
+        .signin-btn {
+            text-transform: uppercase;
+            font-weight: 600;
+            font-size: 14px;
+            background-color: #E5002B;
+            border: none;
+        }
+
+        .signin-btn:hover {
+            background-color: #e5002bf0 !important;
+            border: 1px solid #e5002bf0 !important;
+        }
+
+        .signin-btn:disabled, .signin-btn[disabled] {
+            background-color: #e5002bf0 !important;
+            border: 1px solid #e5002bf0 !important;
+        }
+
+        .forget-psw a {
+            font-weight: 600;
+            font-size: 14px;
+            color: #000;
+        }
+
+        .login-text {
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 32px;
+            color: #343434 !important;
+            text-transform: uppercase;
+        }
+    </style>
+    <h5 class="mt-4 text-white login-text"><strong>Login System</strong></h5>
+    <br>
+    <img src="{% static 'backend/assets/auth/user.svg' %}" width="200" height="200"
+         class="ht-200 mb-0" alt="user">
+    </div>
+    </div>
+
+
+    <div class="col-lg-6 col-xl-7 col-xs-12 col-sm-12 login_form">
+        <div class="container-fluid">
+            <div class="row row-sm">
+                <div class="card-body mt-2 mb-2">
+                    <form method="post" action="#" autocomplete="off">
+                        {% csrf_token %}
+                        <h5 class="text-left mb-2">Sign in to Your Account Using Face ID</h5>
+                        <br>
+
+                        <div class="text-center" id="video-section">
+                            <video style="max-width: 100%;" autoplay="true" id="video-element"></video>
+                        </div>
+                        <div id="img-element" class="mb-2"></div>
+                        <input type="password" id="pin" name="pin" class="form-control mt-2"
+                               placeholder="Enter Your Pin" required style="font-weight: bold;  text-align: center;" autofocus>
+                        <div class="error-message mb-4" id="errorMessage"></div>
+
+
+                        <button id="capture-btn" class="btn ripple btn-main-primary btn-block signin-btn">
+                            Sign In
+                        </button>
+
+                        <a class="btn btn-info ripple btn-main-primary btn-block mt-2" href="{% url 'login' %}">
+                            Sign in Using Email/Username
+                        </a>
+                    </form>
+
+                    <div class="text-right mt-5 ml-0">
+                        <div class="mb-1 forget-psw">
+                            <a href="#">Forgot Password</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

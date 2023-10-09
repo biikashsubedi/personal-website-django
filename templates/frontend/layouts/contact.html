@@ -1,0 +1,151 @@
+<div class="contact-page">
+
+    <!--( a ) Contact Page Fixed Image Portion -->
+
+    <div class="image-container col-md-5 col-sm-12">
+        <div class="mask">
+        </div>
+        <div class="main-heading">
+            <h1>CO<span>NT</span>ACT</h1>
+        </div>
+    </div>
+
+    <!--( b ) Contact Page Content -->
+
+
+    <div class="content-container col-md-7 col-sm-12">
+
+
+        <div>
+            <h2 class="small-heading">SAY HELLO!</h2>
+            <h5 class="text-center text-success"></h5>
+
+            <div class="contact-form col-sm-11 clearfix">
+                <form id="contactForm">
+                    <fieldset>
+                        <div class="col-sm-12">
+                            <input id="name" name="name" placeholder="Your Name*" type="text"
+                                   value="" required>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <input id="email" name="email" placeholder="Your Email*" type="email"
+                                   value="" required>
+                        </div>
+
+
+                        <div class="col-xs-12">
+                            <textarea cols="5" id="message" name="message"
+                                      placeholder="Your Message....*" required></textarea>
+                        </div>
+
+                        <div class="col-xs-12 ml-auto">
+                            <button class="pull-right submitButton" style="background-color: #0ab2e6; color: white"
+                                    type="submit">submit
+                            </button>
+                        </div>
+
+                        <div class="error col-xs-12">
+                            <h3></h3>
+                        </div>
+                    </fieldset>
+                </form>
+
+
+                <!-- Contact Form [ END ] -->
+
+            </div>
+        </div>
+
+        <div class="ccccc">
+            <h2 class="small-heading">MY LOCATION</h2>
+        </div>
+
+        <!--( B ) Google Map -->
+
+        <p>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d113024.84184692826!2d85.29689!3d27.716474!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19ba4de5a597%3A0x56b106cbcbda186!2zQmFzYW50YSBNYXJnIDM4NSwg4KSV4KS-4KSg4KSu4KS-4KSh4KWM4KSBIDQ0NjAw!5e0!3m2!1sne!2snp!4v1555334647848!5m2!1sne!2snp"
+                    width="1050" height="600" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </p>
+
+        <!--( C ) Contact Details -->
+
+        <div class="contact-details clearfix">
+            <h2 class="ccccc small-heading">CONTACT DETAILS</h2>
+            <div class="contact col-sm-4">
+                <p>
+                    <i class="fa fa-map-marker"></i><br>
+                    location
+                </p>
+            </div>
+
+            <!-- Single Contact Details Item [ END ] -->
+
+            <div class="contact col-sm-4">
+                <p>
+                    <i class="fa fa-phone"></i><br>
+                    mobile
+                </p>
+            </div>
+
+            <!-- Single Contact Details Item [ END ] -->
+
+            <div class="contact col-sm-4">
+                <p>
+                    <i class="fa fa-fax"></i><br>
+                    mobile2
+                </p>
+            </div>
+
+            <div class="contact col-sm-4">
+                <p>
+                    <i class="fa fa-envelope"></i><br>
+                    email
+                </p>
+            </div>
+
+            <div class="contact col-sm-4">
+                <p>
+                    <i class="fa fa-envelope"></i><br>
+                    email1
+                </p>
+            </div>
+
+            <!-- Single Contact Details Item [ END ] -->
+
+            <div class="contact col-sm-4">
+                <p>
+                    <i class="fa fa-globe"></i><br>
+                    website
+                </p>
+            </div>
+
+            <!-- Single Contact Details Item [ END ] -->
+
+            <div class="col-xs-12 social-media">
+                <a href="#" class="fa fa-facebook" data-toggle="tooltip"
+                   title="Facebook"
+                   onclick="window.open('#','popup','width=600,height=600'); return false;"></a>
+                <a href="#" class="fa fa-linkedin" data-toggle="tooltip"
+                   title="Linkedin"
+                   onclick="window.open('#','popup','width=600,height=600'); return false;"></a>
+                <a href="#" class="fa fa-instagram" data-toggle="tooltip"
+                   title="Instagram"
+                   onclick="window.open('#','popup','width=600,height=600'); return false;"></a>
+                <a href="#" class="fa fa-twitter" data-toggle="tooltip"
+                   title="Twitter"
+                   onclick="window.open('#','popup','width=600,height=600'); return false;"></a>
+                <a href="#" class="fa fa-flickr" data-toggle="tooltip"
+                   title="Flicker"
+                   onclick="window.open('#','popup','width=600,height=600'); return false;"></a>
+                <a href="#" class="fa fa-globe"
+                   data-toggle="tooltip" title="Tor Browser"
+                   onclick="window.open('#','popup','width=600,height=600'); return false;"></a>
+            </div>
+
+        </div>
+
+
+        {% include 'frontend/layouts/footer.html' %}
+    </div>
+</div>

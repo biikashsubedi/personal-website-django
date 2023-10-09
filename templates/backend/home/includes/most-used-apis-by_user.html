@@ -1,0 +1,29 @@
+<div class="col-md-12 col-xl-4">
+    <div class="card custom-card overflow-hidden" style="max-height: 400px !important;">
+        <div class="card-header border-bottom-0 d-flex">
+            <div>
+                <label class="main-content-label mb-2 pt-1">Most Used Apis By User</label>
+            </div>
+        </div>
+        <div class="chart-container">
+            <div style="max-height: 330px; overflow-y: auto; mergin-top:20px;">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>User Name</th>
+                        <th>Hits</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for api in mostUsedApisByUser %}
+                        <tr>
+                            <td>{{ api.full_name|title }}</td>
+                            <td>{{ api.hits_count }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
