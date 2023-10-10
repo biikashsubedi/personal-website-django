@@ -24,6 +24,7 @@
                                     <tr>
                                         <th scope="col">S.N</th>
                                         <th scope="col">Title</th>
+                                        <th scope="col">Type</th>
                                         <th scope="col">value</th>
                                         <th scope="col">Position</th>
                                         <th scope="col">status</th>
@@ -35,6 +36,7 @@
                                         <tr>
                                             <td>{{ forloop.counter }} </td>
                                             <td>{{ apikey.label }} </td>
+                                            <td>{{ apikey.type }} </td>
                                             <td title="{{ apikey.value }}">{{ apikey.value|truncatewords_html:30 }} </td>
                                             <td>
                                                 <span class="badge badge-warning ">

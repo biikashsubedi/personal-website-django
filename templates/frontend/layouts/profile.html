@@ -23,8 +23,8 @@
                 <div class="story-content clearfix">
                     <div class="">
                         <a class="thumbnail" style="border: none; background: black; padding: 0px;" href="#"><img
-                                src="{% static 'frontend/images/dp.jpg' %}" width="205px" height="66px"/>
-                            <span> <img src="{% static 'frontend/bikash_shield.png' %}"/><br/>Name: Bikash Subedi  <br>Phone: 977 9869286303 <br>Email: biikashsubedi@protonmail.com <br>Gender: Male <br>Age: 24 <br>Address: KTM</span>
+                                src="{{ profile.image.url }}" alt="Personal Image" width="205px" height="66px"/>
+                            {#                            <span> <img src="{% static 'frontend/bikash_shield.png' %}"/><br/>Name: Bikash Subedi  <br>Phone: 977 9869286303 <br>Email: biikashsubedi@protonmail.com <br>Gender: Male <br>Age: 24 <br>Address: KTM</span>#}
                         </a>
                     </div>
 
@@ -32,11 +32,11 @@
                     <div class="col-sm-8 col-xs-12">
                         <h3>ALWAYS FOCUSED ON YOUR DREAM</h3><br>
 
-                        Intro here
+                        {{ profile.introduction|safe }}
 
 
-                        <a href="tel:9869286303" class="hire-me">Call Me</a>
-                        <a href="#" download>Download Resume</a>
+                        <a href="tel:{{ profile.phone1 }}" class="hire-me">Call Me</a>
+                        <a href="{{ profile.resume.url }}" download>Download Resume</a>
                     </div>
                 </div>
             </div>
@@ -46,15 +46,15 @@
         <div class="services-container clearfix">
             <h2 class="small-heading">WHAT CAN I DO FOR YOU?</h2>
 
-            @foreach($skills as $skill)
-            <div class="services col-lg-4 col-md-6 col-sm-4">
-                <i class="glyphicon glyphicon-warning-sign"></i>
-                <h3>1111</h3>
-                <p>
-                    1111
-                </p>
-            </div>
-            @endforeach
+            {% for skill in skills %}
+                <div class="services col-lg-4 col-md-6 col-sm-4">
+                    <i class="glyphicon glyphicon-warning-sign"></i>
+                    <h3>{{ skill.label }}</h3>
+                    <p>
+                        {{ skill.value }}
+                    </p>
+                </div>
+            {% endfor %}
 
 
         </div>
@@ -64,15 +64,15 @@
         <div class=" facts clearfix">
             <div class="col-xs-4">
                 <h3>COMPLETED PROJECTS </h3>
-                <h1>200+</h1>
+                <h1>{{ profile.completed_project }}+</h1>
             </div>
             <div class="col-xs-4">
                 <h3>COMPANY LINKED</h3>
-                <h1>1200+</h1>
+                <h1>{{ profile.company_linked }}+</h1>
             </div>
             <div class="col-xs-4">
                 <h3>LOVE</h3>
-                <h1>only 1</h1>
+                <h1>only {{ profile.love }}</h1>
             </div>
 
         </div>

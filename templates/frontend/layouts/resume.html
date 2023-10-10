@@ -21,19 +21,19 @@
 
             <div class="education-container col-lg-10 col-lg-offset-1 col-md-12 col-md-offset-0 col-sm-10 col-sm-offset-1">
 
-                @foreach($educations as $education)
-                <div class="item">
-                    <div class="bullet hidden-xs">
+                {% for obj in educations %}
+                    <div class="item">
+                        <div class="bullet hidden-xs">
+                        </div>
+                        <div class="education-content">
+                            <h3>{{ obj.label|safe }}</h3>
+                            <p>
+                                {{ obj.value }}
+                            </p>
+                        </div>
                     </div>
-                    <div class="education-content">
-                        <h3>education title</h3>
-                        <p>
-                            education value
-                        </p>
-                    </div>
-                </div>
 
-                @endforeach
+                {% endfor %}
 
             </div>
         </div>
@@ -43,18 +43,18 @@
         <div class="experience clearfix">
             <h2 class="small-heading">EXPERIENCE</h2>
             <div class="experience-container col-lg-10 col-lg-offset-1 col-md-12 col-md-offset-0 col-sm-10 col-sm-offset-1">
-                @foreach($experiences as $experience)
-                <div class="item">
-                    <div class="bullet hidden-xs">
+                {% for obj in experiences %}
+                    <div class="item">
+                        <div class="bullet hidden-xs">
+                        </div>
+                        <div class="experience-content">
+                            <h3>{{ obj.label|safe }}</h3>
+                            <p>
+                                {{ obj.value }}
+                            </p>
+                        </div>
                     </div>
-                    <div class="experience-content">
-                        <h3>experince title</h3>
-                        <p>
-                            experince value
-                        </p>
-                    </div>
-                </div>
-                @endforeach
+                {% endfor %}
 
             </div>
         </div>
@@ -64,14 +64,14 @@
             <h2 class="small-heading">SKILLS</h2>
             <div class="clearfix circle">
 
-                @foreach($skills as $skill)
-                <div class="skill-container col-sm-4">
-                    <h3>11111</h3>
-                    <div class="skill" data-percent="60">
-                        <span>111111</span>
+                {% for obj in experienceNumbers %}
+                    <div class="skill-container col-sm-4">
+                        <h3>{{ obj.label }}</h3>
+                        <div class="skill" data-percent="60">
+                            <span>{{ obj.value }}</span>
+                        </div>
                     </div>
-                </div>
-                @endforeach
+                {% endfor %}
 
 
             </div>

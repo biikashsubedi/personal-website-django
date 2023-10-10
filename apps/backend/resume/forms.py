@@ -37,6 +37,7 @@ class ExperienceForm(ModelForm):
         model = Experience
         fields = [
             'label',
+            'type',
             'value',
             'status',
             'position',

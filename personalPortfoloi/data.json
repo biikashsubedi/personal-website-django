@@ -1,4 +1,40 @@
 {
   "name": "Bikash Subedi",
-  "phone1": 9869286303
+  "phone1": "+9779869286303",
+  "phone2": "+9779911167654",
+  "introduction": "<h4>'This is Bikash Subedi's website, and this is a bit of copy about him, It's not enough intro about him.'</h4><p>Bikash is in IT Faculty, He has a lots of knowledge about Digital World, Content &amp; Contents Rules, Cyber Security, Programming, Cisco, Web, (AND MORE): Active in Podcasts, Videos, Ebooks, Webinars: That Engage Customers and Ignite Your Business (Professional With Champion)</p><p>His company, BikkizTweau, is a IT training and education company with more than 600,000 subscribers.</p><p>BikkizTweau trains worldwide through its online and in-person education programs.</p><p>Her previous company, ClickZ, is one of the first sources of information in the world. He left it in 2018, a lifetime ago in Internet years.</p><p>Bikash was cited as a top thought leader.</p><p>Bikash is the world’s first Chief Content Officer and an acclaimed writer and communicator.</p><p>Bikash lives in Chitwan, where he stay with family and have beautiful girlfriend.</p>",
+  "website": "bikashsubedi.com.np",
+  "facebook_link": "https://www.facebook.com/biikashsubedi0",
+  "linkedin_link": "https://www.linkedin.com/in/biikashsubedi/",
+  "instagram_link": "https://www.instagram.com/biikashsubedi/",
+  "twitter_link": "https://twitter.com/biikashsubedi",
+  "tor_link": "https://3vokhzzop5srdrtetose5jfd4fdhrcnflyd5glg4evwzdujkuoobsyyd.onion/",
+  "gmap_link": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d113024.84184692826!2d85.29689!3d27.716474!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19ba4de5a597%3A0x56b106cbcbda186!2zQmFzYW50YSBNYXJnIDM4NSwg4KSV4KS-4KSg4KSu4KS-4KSh4KWM4KSBIDQ0NjAw!5e0!3m2!1sne!2snp!4v1555334647848!5m2!1sne!2snp",
+  "skills": {
+    "CYBER SECURITY": "Security is main focus theses days and this is my DREAM work, I'm involved in many security organization so it's easy to find issues and solution in your system. Just inbox me i will give your solution as possible of CYBER SECURITY.",
+    "CISCO PACKET TRACER": "This is routing system specially for big and advanced company. i hate to work in simple and small project because i'm already professional in CISCO system.",
+    "WEB DEVELOPMENT & DESIGN": "Web is anywhere and anyone can used it, if you want to involved in digital world be decide to create web for you and your team. Here you can get a lots of solution and many different option for WEB DESIGN and DEVELOPMENT.",
+    "LINUX STUDY": "This is the case of server, it depends upon which server you used for you and your team :). It's not easy to understand LINUX without sources, if you want then i will help you to be a PRO in LINUX SYSTEM.",
+    "PROGRAMMING": "This time without programming, nothings happens...here you can get a lots of programming solution for your company and project. Also, our members gets future support anytime anywhere.",
+    "PROFESSIONAL IDEAS": "It's not easy to stay on the similar position at this time as a trending, so ideas may affect to continue your dream with huge support. Don't worry, this is an right place to achieve PROFESSIONAL and BRIGHT ideas."
+  },
+  "educations": {
+    "Shree Laxmi Higher Secondary School<span> / 2068</span>": "In our nepali education system, SLC is most popular and gives a high priority for those student who alresdy completed SLC exam. In the year 2068, i have completed my SLC exam and that was the wounderful day for me.",
+    "Shree Laxmi Higher Secondary School<span> / 2069 -  2071</span>": "To complete my grade 11 and 12, i used same college because that was the most popular college at that time and all the lectures are to much closer.",
+    "University of Leeds Beckett<span> / -2075</span>": "I have been graduated from the university of LeedsBeckett, which is the top university in the world. i used BSC-IT in Bachelor, thats attractive subjects for me because i love degital world."
+  },
+  "experienceNumbers": {
+    "Linux System": "60%",
+    "Laravel": "90%",
+    "Dreamweaver": "80%",
+    "Design & Development": "100%",
+    "Illustrator": "60%",
+    "Coding": "85%"
+  },
+  "experiences": {
+    "Linux Distributor<span> / October 2074<br></span>": "It's an operating system made from a software collection, which is based upon the Linux kernel and, often, a package management system. Linux users usually obtain their operating system by downloading one of the Linux distributions, which are available for a wide variety of system.",
+    "Senior Web Developer<span> / September 2074<br></span>": "Web developers are found working in various types of organizations, including large corporations and governments, small and medium - sized companies, or alone as freelancers. Some web developers work for one organization as a permanent full-time employee, while others may work as independent consultants, or as contractors for an employment agency.",
+    "Laravel Developer<span> / October 2075 - November 2011<br></span>": "Laravel is a free, open-source[3] PHP web framework, created by Taylor Otwell and intended for the development of web applications following the model–view–controller (MVC) architectural pattern and based on Symfony. Some of the features of Laravel are a modular packaging system with a dedicated dependency manager, different ways for accessing relational databases, utilities that aid in application deployment and maintenance.",
+    "Cyber Security As Guest<span> /  2075 <br></span>": "Computer security, cybersecurity or information technology security (IT security) is the protection of computer systems from theft or damage to their hardware, software or electronic data, as well as from disruption or misdirection of the services they provide"
+  }
 }

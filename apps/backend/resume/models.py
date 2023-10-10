@@ -22,6 +22,7 @@ class Education(models.Model):
 
 class Experience(models.Model):
     label = models.CharField(_("label"), max_length=200, blank=True, null=True)
+    type = models.CharField(_("Type"), max_length=200, blank=True, null=True)
     value = models.TextField(_("value"), blank=True, null=True)
     status = models.BooleanField(_('status'), default=True)
     position = models.IntegerField(_("position"), blank=True, null=True)

@@ -64,7 +64,7 @@
         <!--( B ) Google Map -->
 
         <p>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d113024.84184692826!2d85.29689!3d27.716474!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19ba4de5a597%3A0x56b106cbcbda186!2zQmFzYW50YSBNYXJnIDM4NSwg4KSV4KS-4KSg4KSu4KS-4KSh4KWM4KSBIDQ0NjAw!5e0!3m2!1sne!2snp!4v1555334647848!5m2!1sne!2snp"
+            <iframe src="{{ profile.gmap_link }}"
                     width="1050" height="600" frameborder="0" style="border:0" allowfullscreen></iframe>
         </p>
 
@@ -75,7 +75,7 @@
             <div class="contact col-sm-4">
                 <p>
                     <i class="fa fa-map-marker"></i><br>
-                    location
+                    {{ profile.location }}
                 </p>
             </div>
 
@@ -84,7 +84,7 @@
             <div class="contact col-sm-4">
                 <p>
                     <i class="fa fa-phone"></i><br>
-                    mobile
+                    {{ profile.phone1 }}
                 </p>
             </div>
 
@@ -93,21 +93,21 @@
             <div class="contact col-sm-4">
                 <p>
                     <i class="fa fa-fax"></i><br>
-                    mobile2
+                    {{ profile.phone2 }}
                 </p>
             </div>
 
             <div class="contact col-sm-4">
                 <p>
                     <i class="fa fa-envelope"></i><br>
-                    email
+                    {{ profile.email1 }}
                 </p>
             </div>
 
             <div class="contact col-sm-4">
                 <p>
                     <i class="fa fa-envelope"></i><br>
-                    email1
+                    {{ profile.email2 }}
                 </p>
             </div>
 
@@ -116,31 +116,29 @@
             <div class="contact col-sm-4">
                 <p>
                     <i class="fa fa-globe"></i><br>
-                    website
+                    {{ profile.website_link }}
                 </p>
             </div>
 
             <!-- Single Contact Details Item [ END ] -->
 
             <div class="col-xs-12 social-media">
-                <a href="#" class="fa fa-facebook" data-toggle="tooltip"
-                   title="Facebook"
-                   onclick="window.open('#','popup','width=600,height=600'); return false;"></a>
-                <a href="#" class="fa fa-linkedin" data-toggle="tooltip"
-                   title="Linkedin"
-                   onclick="window.open('#','popup','width=600,height=600'); return false;"></a>
-                <a href="#" class="fa fa-instagram" data-toggle="tooltip"
-                   title="Instagram"
-                   onclick="window.open('#','popup','width=600,height=600'); return false;"></a>
-                <a href="#" class="fa fa-twitter" data-toggle="tooltip"
-                   title="Twitter"
-                   onclick="window.open('#','popup','width=600,height=600'); return false;"></a>
-                <a href="#" class="fa fa-flickr" data-toggle="tooltip"
-                   title="Flicker"
-                   onclick="window.open('#','popup','width=600,height=600'); return false;"></a>
-                <a href="#" class="fa fa-globe"
-                   data-toggle="tooltip" title="Tor Browser"
-                   onclick="window.open('#','popup','width=600,height=600'); return false;"></a>
+                <a href="{{ profile.facebook_link }}" class="fa fa-facebook" data-toggle="tooltip"
+               title="Facebook"
+               onclick="window.open('{{ profile.facebook_link }}','popup','width=800,height=600'); return false;"></a>
+            <a href="{{ profile.linkedin_link }}" class="fa fa-linkedin" data-toggle="tooltip"
+               title="Linkedin"
+               onclick="window.open('{{ profile.linkedin_link }}','popup','width=800,height=600'); return false;"></a>
+            <a href="{{ profile.instagram_link }}" class="fa fa-instagram" data-toggle="tooltip"
+               title="Instagram"
+               onclick="window.open('{{ profile.instagram_link }}','popup','width=800,height=600'); return false;"></a>
+            <a href="{{ profile.twitter_link }}" class="fa fa-twitter" data-toggle="tooltip" title="Twitter"
+               onclick="window.open('{{ profile.twitter_link }}','popup','width=800,height=600'); return false;"></a>
+            <a href="{{ profile.tor_link }}" class="fa fa-globe"
+               data-toggle="tooltip" title="Tor Browser"
+               onclick="window.open('{{ profile.tor_link }}','popup','width=800,height=600'); return false;"></a>
+
+
             </div>
 
         </div>

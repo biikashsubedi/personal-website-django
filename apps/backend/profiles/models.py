@@ -10,6 +10,7 @@ class Profile(models.Model):
     introduction = RichTextField(blank=True, null=True)
     image = models.ImageField(_('Image'), default='default/image.png', upload_to='profile')
     resume = models.FileField(_('Resume'), default='default/image.png', upload_to='profile/resume')
+    location = models.CharField(_("Location"), max_length=200, default='Kathmandu, Nepal')
     phone1 = models.IntegerField(_("Phone 1"), default=9869286303)
     phone2 = models.IntegerField(_("Phone 2"), default=9821241529)
     completed_project = models.IntegerField(_("Completed Project"), default=1)
@@ -25,7 +26,7 @@ class Profile(models.Model):
     instagram_link = models.CharField(_("Instagram Link"), max_length=200, default='bikashsubedi.com.np')
     twitter_link = models.CharField(_("Twitter Link"), max_length=200, default='bikashsubedi.com.np')
     tor_link = models.CharField(_("Tor Link"), max_length=200, default='bikashsubedi.com.np')
-    gmap_link = models.CharField(_("Google Map Link"), max_length=200, default='bikashsubedi.com.np')
+    gmap_link = models.CharField(_("Google Map Link"), max_length=500, default='bikashsubedi.com.np')
 
     status = models.BooleanField(_('status'), default=True)
     details = models.JSONField(_("details"), blank=True, null=True)
