@@ -32,9 +32,13 @@
                                                             {{ form.status }}
                                                             <label for="id_status">Active</label>
                                                         </div>
-                                                    {% elif field.html_name == 'introduction' %}
-                                                        {{ form.introduction }}
-                                                        {{ form.media }}
+                                                        
+                                                    {% elif field.html_name == 'url' %}
+                                                        {{ form.url }}
+                                                        {% if field.errors %}
+                                                            <strong class="text-danger" role="alert">
+                                                                {{ field.errors|striptags }}</strong>
+                                                        {% endif %}
                                                     {% else %}
                                                         <input type="{{ field.field.widget.input_type }}"
                                                                name="{{ field.html_name }}"

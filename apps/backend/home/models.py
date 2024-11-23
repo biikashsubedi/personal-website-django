@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from personalPortfoloi.metaData import URLS
 
 
 class Config(models.Model):
@@ -19,7 +20,7 @@ class Config(models.Model):
 
 class Link(models.Model):
     label = models.CharField(_("label"), max_length=200)
-    url = models.CharField(_("url"), max_length=200)
+    url = models.CharField(_("url"), max_length=200, choices=URLS, unique=True)
     icon = models.CharField(_("icon"), max_length=200)
     status = models.BooleanField(_('Status'), default=True)
 
