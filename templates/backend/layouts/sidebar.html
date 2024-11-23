@@ -3,7 +3,7 @@
 <!-- Sidemenu -->
 <div class="main-sidebar main-sidebar-sticky side-menu">
     <div class="sidemenu-logo">
-        <a class="main-logo" href="">
+        <a class="main-logo" href="{% url 'home:index' %}">
             <img src="{% static 'backend/assets/img/logo-big-lok-sewa.png' %}" class="header-brand-img desktop-logo"
                  alt="logo" width="100" height="40">
             <img src="{% static 'backend/assets/img/logo-small-lok-sewa.png' %}" class="header-brand-img icon-logo"
@@ -62,6 +62,13 @@
                     <span class="shape2"></span>
                     <i class='sidemenu-icon ti-settings'></i>
                     <span class="sidemenu-label">Config</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'home:link.index' %}">
+                    <span class="shape1"></span>
+                    <span class="shape2"></span>
+                    <i class='sidemenu-icon fas fa-link'></i>
+                    <span class="sidemenu-label">Links</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'user.index' %}">

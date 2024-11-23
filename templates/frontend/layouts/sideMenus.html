@@ -1,48 +1,23 @@
- <div class="col-xxl-1 d-xxl-block d-none">
-                    <div class="bostami-main-menu-wrap">
-                        <nav class="bastami-main-menu main_menu">
-                            <ul>
-                                <li class="active">
-                                    <a href="index.html">
-                                        <span>
-                                            <i class="fa-light fa-address-card"></i>
-                                        </span>
-                                        about
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="resume.html">
-                                        <span>
-                                            <i class="fa-light fa-file-user"></i>
-                                        </span>
-                                        Resume
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="portfolio.html">
-                                        <span>
-                                            <i class="fa-light fa-briefcase"></i>
-                                        </span>
-                                        Works
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="blog.html">
-                                        <span>
-                                            <i class="fa-light fa-newspaper"></i>
-                                        </span>
-                                        Blogs
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="contact.html">
-                                        <span>
-                                            <i class="fa-light fa-address-book"></i>
-                                        </span>
-                                        contact
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
+{% if links.count %}
+
+
+    <div class="col-xxl-1 d-xxl-block d-none">
+        <div class="bostami-main-menu-wrap">
+            <nav class="bastami-main-menu main_menu">
+                <ul>
+                    {% for link in links %}
+                        <li class="{% if link.url == activeUrl %} active {% endif %}">
+                            <a href="{{ link.url }}">
+                                <span>
+                                    <i class="fa-light {{ link.icon }}"></i>
+                                </span>
+                                {{ link.label|title }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+{% endif %}

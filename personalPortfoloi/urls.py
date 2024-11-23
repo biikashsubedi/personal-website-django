@@ -8,7 +8,7 @@ urlpatterns = [
 
     # backend
     path('', include('apps.backend.user.urls')),
-    path('home/', include('apps.backend.home.urls')),
+    path('', include('apps.backend.home.urls')),
     path('portfolio/', include('apps.backend.portfoloi.urls')),
     path('profiles/', include('apps.backend.profiles.urls')),
     path('', include('apps.backend.resume.urls')),

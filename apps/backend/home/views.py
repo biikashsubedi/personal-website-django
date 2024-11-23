@@ -1,11 +1,13 @@
 import json
 
+from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect
 
+from .forms import LinkForm
 from .models import *
 from django.contrib import messages
-from django.views.generic import ListView
-from django.urls import reverse
+from django.views.generic import ListView, UpdateView, DeleteView, CreateView
+from django.urls import reverse, reverse_lazy
 
 from ..profiles.models import Profile
 from ..resume.models import Skill, Education, Experience
@@ -127,3 +129,31 @@ def experienceData(request):
     except Exception as e:
         messages.success(request, 'Unable to set default data.')
         return redirect(reverse('resume:experience.index'))
+
+
+class LinkIndex(ListView):
+    model = Link
+    template_name = "backend/link/index.html"
+
+
+class LinkCreate(SuccessMessageMixin, CreateView):
+    model = Link
+    template_name = "backend/link/form.html"
+    form_class = LinkForm
+    success_message = "Link Created Successfully."
+    success_url = reverse_lazy('home:link.index')
+
+
+class LinkUpdate(SuccessMessageMixin, UpdateView):
+    model = Link
+    template_name = "backend/link/form.html"
+    form_class = LinkForm
+    success_message = "Link Updated Successfully."
+    success_url = reverse_lazy('home:link.index')
+
+
+class LinkDelete(SuccessMessageMixin, DeleteView):
+    model = Link
+    template_name = "backend/layouts/deletePopUp.html"
+    success_message = "Link Deleted Successfully."
+    success_url = reverse_lazy('home:link.index')
