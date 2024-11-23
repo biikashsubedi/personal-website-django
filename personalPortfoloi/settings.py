@@ -36,6 +36,9 @@ INSTALLED_APPS = [
     'apps.backend.user',
 ]
 
+APPEND_SLASH = False
+REMOVE_SLASH = True
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",

@@ -1,7 +1,13 @@
+about = '/'
+profile = 'profile'
+works = 'works'
+blogs = 'blogs'
+contact = 'contact'
+
 URLS = (
-    ('/', '/'),
-    ('resume', 'resume'),
-    ('works', 'works'),
-    ('blogs', 'blogs'),
-    ('contact', 'contact'),
+    (about, about),
+    (profile, profile),
+    (works, works),
+    (blogs, blogs),
+    (contact, contact),
 )

@@ -1,7 +1,7 @@
 from django.views.generic import ListView
 
+from personalPortfoloi.metaData import *
 from ...backend.home.models import Config
-from ...backend.profiles.models import Profile
 from ...backend.resume.models import *
 
 
@@ -18,7 +18,7 @@ class HomeView(ListView):
         context['experiences'] = Experience.objects.filter(status=True, type='text').all()
         context['experienceNumbers'] = Experience.objects.filter(status=True, type='number').all()
         context['educations'] = Education.objects.filter(status=True).all()
-        context['activeUrl'] = "/"
+        context['activeUrl'] = about
 
         return context
 
@@ -30,9 +30,10 @@ class ResumeView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['object_list'] = {}
-        context['activeUrl'] = "resume"
+        context['activeUrl'] = profile
 
         return context
+
 
 class WorksView(ListView):
     model = Config
@@ -41,9 +42,10 @@ class WorksView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['object_list'] = {}
-        context['activeUrl'] = "works"
+        context['activeUrl'] = works
 
         return context
+
 
 class BlogView(ListView):
     model = Config
@@ -52,9 +54,10 @@ class BlogView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['object_list'] = {}
-        context['activeUrl'] = "blogs"
+        context['activeUrl'] = blogs
 
         return context
+
 
 class ContactView(ListView):
     model = Config
@@ -63,6 +66,6 @@ class ContactView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['object_list'] = {}
-        context['activeUrl'] = "contact"
+        context['activeUrl'] = contact
 
         return context
