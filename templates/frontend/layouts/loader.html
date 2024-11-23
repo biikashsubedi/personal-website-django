@@ -1,5 +1,55 @@
-<!-- PRELOADER -->
-<div id="preloader">
-    <div class="loader_line"></div>
+<div class="loader-container" id="loader-container">
+    <span class="loader"></span>
 </div>
-<!-- /PRELOADER -->
+
+<style>
+    .loader-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        display: none; /* Hide initially */
+        justify-content: center;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(8px);
+        z-index: 9999;
+    }
+
+    .loader {
+        width: 48px;
+        height: 48px;
+        border: 5px solid;
+        border-color: #FF3D00 transparent;
+        border-radius: 50%;
+        display: inline-block;
+        box-sizing: border-box;
+        animation: rotation 1s linear infinite;
+    }
+
+    @keyframes rotation {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+
+<script>
+    // Flag to track if the loader should be shown
+    let loaderTimeout;
+
+    // Start the loader after 1.5 seconds if the page has not loaded
+    loaderTimeout = setTimeout(function () {
+        document.getElementById('loader-container').style.display = 'flex'; // Show loader
+    }, 1000); // 1.5 seconds delay
+
+    // Hide the loader when the page finishes loading
+    window.addEventListener('load', function () {
+        clearTimeout(loaderTimeout); // Cancel the timeout if the page loads quickly
+        document.getElementById('loader-container').style.display = 'none'; // Hide loader
+    });
+</script>
