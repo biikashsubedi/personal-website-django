@@ -1,0 +1,9 @@
+<div class="footer-copyright text-center pt-50 pb-25">
+    <span>© <span id="current-year"></span> All Rights Reserved by 
+        <a href="/" target="_blank" rel="noopener noreferrer" id="author-name">{{ profile.name|title }}</a>.
+    </span>
+</div>
+
+<script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>
