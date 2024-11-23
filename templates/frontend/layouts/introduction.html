@@ -1,40 +1,96 @@
-<div class="introduction">
-    <img alt="" src="">
-    <div class="mask">
-    </div>
-    <div class="intro-content">
+ <div class="col-xxl-3 col-xl-3">
+                    <div class="bostami-parsonal-info-area">
+                        <div class="bostami-parsonal-info-wrap">
 
-        <h1 class="nameField">HELLO,<br>
-            I'M <span>Bikash</span> Subedi</h1>
-        <h2>WELCOME !</h2><br><br><br><br><br><br><br><br><br><br><br>
+                            <!-- img -->
+                            <div class="bostami-parsonal-info-img">
+                                <img src="assets/img/parsonal-info/parson-img-1.png" alt="avatar">
+                            </div>
 
-        <p class="social-media hidden-xs">
-            <a href="{{ profile.facebook_link }}" class="fa fa-facebook" data-toggle="tooltip"
-               title="Facebook"
-               onclick="window.open('{{ profile.facebook_link }}','popup','width=800,height=600'); return false;"></a>
-            <a href="{{ profile.linkedin_link }}" class="fa fa-linkedin" data-toggle="tooltip"
-               title="Linkedin"
-               onclick="window.open('{{ profile.linkedin_link }}','popup','width=800,height=600'); return false;"></a>
-            <a href="{{ profile.instagram_link }}" class="fa fa-instagram" data-toggle="tooltip"
-               title="Instagram"
-               onclick="window.open('{{ profile.instagram_link }}','popup','width=800,height=600'); return false;"></a>
-            <a href="{{ profile.twitter_link }}" class="fa fa-twitter" data-toggle="tooltip" title="Twitter"
-               onclick="window.open('{{ profile.twitter_link }}','popup','width=800,height=600'); return false;"></a>
-            <a href="{{ profile.tor_link }}" class="fa fa-globe"
-               data-toggle="tooltip" title="Tor Browser"
-               onclick="window.open('{{ profile.tor_link }}','popup','width=800,height=600'); return false;"></a>
-        </p>
+                            <!-- name -->
+                            <h4 class="bostami-parsonal-info-name">
+                                <a href="#">Bostami Hassan</a>
+                            </h4>
+                            <span class="bostami-parsonal-info-bio mb-15">Ui/Ux Designer</span>
 
-    </div>
-</div>
+                            <!-- socail link -->
+                            <ul class="bostami-parsonal-info-social-link mb-30">
+                                <li>
+                                    <a href="#" class="facebook">
+                                        <i class="fa-brands fa-facebook-f"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="twitter">
+                                        <i class="fa-brands fa-twitter"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="instagram">
+                                        <i class="fa-brands fa-instagram"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="linkedin">
+                                        <i class="fa-brands fa-linkedin-in"></i>
+                                    </a>
+                                </li>
+                            </ul>
 
-<script>
-    fullName = "{{ profile.name }}"
-    var names = fullName.split(" ");
+                            <!-- contact -->
+                            <div class="bostami-parsonal-info-contact mb-30">
+                                <div class="bostami-parsonal-info-contact-item phone">
+                                    <div class="icon">
+                                        <i class="fa-solid fa-mobile-screen-button"></i>
+                                    </div>
+                                    <div class="text">
+                                        <span>Phone</span>
+                                        <p>+123 456 7890</p>
+                                    </div>
+                                </div>
 
-    var elements = document.getElementsByClassName('nameField');
-    for (var i = 0; i < elements.length; i++) {
-        elements[i].innerHTML = "HELLO,<br>I'M <span>" + names[0] + "</span> " + names[1];
-    }
 
-</script>
+                                <div class="bostami-parsonal-info-contact-item email">
+                                    <div class="icon">
+                                        <i class="fa-regular fa-envelope-open-text"></i>
+                                    </div>
+                                    <div class="text">
+                                        <span>Email</span>
+                                        <p>example@mail.com</p>
+                                    </div>
+                                </div>
+
+                                <div class="bostami-parsonal-info-contact-item location">
+                                    <div class="icon">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                    </div>
+                                    <div class="text">
+                                        <span>Location</span>
+                                        <p>Hong kong china</p>
+                                    </div>
+                                </div>
+
+                                <div class="bostami-parsonal-info-contact-item calendar">
+                                    <div class="icon">
+                                        <i class="fa-light fa-calendar-days"></i>
+                                    </div>
+                                    <div class="text">
+                                        <span>Birthday</span>
+                                        <p>May 27, 1990</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- cv button -->
+                            <div class="bostami-parsonal-info-btn">
+                                <a class="btn-1" href="#">
+                                    <span class="icon">
+                                        <i class="fa-regular fa-download"></i>
+                                    </span>
+                                    download cv
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
