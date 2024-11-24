@@ -131,6 +131,29 @@ def experienceData(request):
         return redirect(reverse('resume:experience.index'))
 
 
+def linkData(request):
+    try:
+        with open('personalPortfoloi/data.json', 'r') as file:
+            data = json.load(file)
+
+            for index, value in data['links'].items():
+                checkExists = Link.objects.filter(label__iexact=index).exists()
+                if not checkExists:
+                    checkExists = Link(
+                        label=index,
+                        url=value
+                    )
+                    checkExists.save()
+
+            messages.success(request, 'Successfully data reset.')
+            return redirect(reverse('home:link.index'))
+
+
+    except Exception as e:
+        messages.success(request, 'Unable to set default data.')
+        return redirect(reverse('home:link.index'))
+
+
 class LinkIndex(ListView):
     model = Link
     template_name = "backend/link/index.html"

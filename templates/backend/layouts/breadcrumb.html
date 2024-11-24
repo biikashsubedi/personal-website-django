@@ -51,6 +51,11 @@
                             class="fa fa-recycle"></i> Set Default Data
                     </button>
                 {% endif %}
+                {% if title == 'Link' %}
+                    <button class="float-right btn btn-sm btn-danger ml-2" onclick="window.location='{% url 'home:links.data'  %}'"><i
+                            class="fa fa-recycle"></i> Set Default Data
+                    </button>
+                {% endif %}
                 <button class="float-right btn btn-sm btn-success ml-2" onclick="window.location='create'"><i
                         class="fa fa-plus"></i> Add New
                 </button>

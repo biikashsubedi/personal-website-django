@@ -9,6 +9,7 @@ urlpatterns = [
     path('home/skill/data', skillData, name='skill.data'),
     path('home/education/data', educationData, name='education.data'),
     path('home/experience/data', experienceData, name='experience.data'),
+    path('home/links/data', linkData, name='links.data'),
 
     path('link/', LinkIndex.as_view(), name='link.index'),
     path('link/create/', LinkCreate.as_view(), name='link.create'),

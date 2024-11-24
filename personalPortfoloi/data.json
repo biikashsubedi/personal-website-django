@@ -36,5 +36,12 @@
     "Senior Web Developer<span> / September 2074<br></span>": "Web developers are found working in various types of organizations, including large corporations and governments, small and medium - sized companies, or alone as freelancers. Some web developers work for one organization as a permanent full-time employee, while others may work as independent consultants, or as contractors for an employment agency.",
     "Laravel Developer<span> / October 2075 - November 2011<br></span>": "Laravel is a free, open-source[3] PHP web framework, created by Taylor Otwell and intended for the development of web applications following the model–view–controller (MVC) architectural pattern and based on Symfony. Some of the features of Laravel are a modular packaging system with a dedicated dependency manager, different ways for accessing relational databases, utilities that aid in application deployment and maintenance.",
     "Cyber Security As Guest<span> /  2075 <br></span>": "Computer security, cybersecurity or information technology security (IT security) is the protection of computer systems from theft or damage to their hardware, software or electronic data, as well as from disruption or misdirection of the services they provide"
+  },
+  "links": {
+    "about": "/",
+    "profile": "profile",
+    "works": "works",
+    "blogs": "blogs",
+    "contact": "contact"
   }
 }
