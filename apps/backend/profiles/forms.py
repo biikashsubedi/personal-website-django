@@ -12,6 +12,7 @@ class ProfileForm(ModelForm):
         fields = [
             'name',
             'introduction',
+            'job_title',
             'image',
             'resume',
             'phone1',

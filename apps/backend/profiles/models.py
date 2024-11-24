@@ -8,6 +8,7 @@ from ckeditor.fields import RichTextField
 class Profile(models.Model):
     name = models.CharField(_("Name"), max_length=200, default='Bikash Subedi')
     introduction = RichTextField(blank=True, null=True)
+    job_title = models.CharField(_("Job Title"), max_length=200, default='Developer')
     image = models.ImageField(_('Image'), default='default/image.png', upload_to='profile')
     resume = models.FileField(_('Resume'), default='default/image.png', upload_to='profile/resume')
     location = models.CharField(_("Location"), max_length=200, default='Kathmandu, Nepal')
