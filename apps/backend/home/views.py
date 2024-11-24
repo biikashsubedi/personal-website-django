@@ -10,7 +10,8 @@ from django.views.generic import ListView, UpdateView, DeleteView, CreateView
 from django.urls import reverse, reverse_lazy
 
 from ..profiles.models import Profile
-from ..resume.models import Skill, Education, Experience
+from ..resume.models import Skill, Education, Experience, KeySkill
+from ..resume.views import KeySkillDelete
 
 
 # Create your views here.
@@ -73,6 +74,16 @@ def ExtractData(request):
                         value=value['value'],
                     )
                     checkExists.save()
+
+            for index in data['keySkills']:
+                print(index)
+                checkExists = KeySkill.objects.filter(label=index).exists()
+                if not checkExists:
+                    checkExists = KeySkill(
+                        label=index
+                    )
+                    checkExists.save()
+
 
             for index, value in data['experiences'].items():
                 checkExists = Experience.objects.filter(label=index).exists()

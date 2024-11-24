@@ -19,7 +19,7 @@ class Education(models.Model):
         return self.label
 
     class Meta:
-        db_table = 'education'
+        db_table = 'educations'
         verbose_name_plural = 'Education'
 
 
@@ -56,3 +56,16 @@ class Skill(models.Model):
     class Meta:
         db_table = 'skills'
         verbose_name_plural = 'Skill'
+
+
+class KeySkill(models.Model):
+    label = models.CharField(_("label"), max_length=200, blank=True, null=True)
+    status = models.BooleanField(_('status'), default=True)
+    position = models.IntegerField(_("position"), blank=True, null=True)
+
+    def __str__(self):
+        return self.label
+
+    class Meta:
+        db_table = 'key_skills'
+        verbose_name_plural = 'Key Skills'

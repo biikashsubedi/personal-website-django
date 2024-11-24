@@ -13,6 +13,7 @@ class EducationForm(ModelForm):
             'label',
             'year',
             'location',
+            'background',
             'value',
             'status',
             'position',
@@ -29,6 +30,16 @@ class SkillForm(ModelForm):
             'value',
             'icon',
             'background',
+            'status',
+            'position',
+        ]
+
+
+class KeySkillForm(ModelForm):
+    class Meta:
+        model = KeySkill
+        fields = [
+            'label',
             'status',
             'position',
         ]

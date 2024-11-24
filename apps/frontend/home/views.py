@@ -28,6 +28,7 @@ class ResumeView(ListView):
         context = super().get_context_data(**kwargs)
         context['object_list'] = {}
         context['educations'] = Education.objects.filter(status=True).order_by('position')
+        context['keySkills'] = KeySkill.objects.filter(status=True).order_by('position')
         context['activeUrl'] = profile
 
         return context

@@ -18,4 +18,9 @@ urlpatterns = [
     path('skill/update/<str:pk>', SkillUpdate.as_view(), name='skill.update'),
     path('skill/delete/<str:pk>', SkillDelete.as_view(), name='skill.delete'),
 
+    path('key-skill/', KeySkillIndex.as_view(), name='key-skill.index'),
+    path('key-skill/create/', KeySkillCreate.as_view(), name='key-skill.create'),
+    path('key-skill/update/<str:pk>', KeySkillUpdate.as_view(), name='key-skill.update'),
+    path('key-skill/delete/<str:pk>', KeySkillDelete.as_view(), name='key-skill.delete'),
+
 ]

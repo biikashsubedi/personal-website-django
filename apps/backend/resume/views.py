@@ -85,3 +85,30 @@ class SkillDelete(SuccessMessageMixin, DeleteView):
     template_name = "backend/layouts/deletePopUp.html"
     success_message = "Skill Deleted Successfully."
     success_url = reverse_lazy('resume:skill.index')
+
+class KeySkillIndex(ListView):
+    model = KeySkill
+    template_name = "backend/resume/key-skill/index.html"
+
+
+class KeySkillCreate(SuccessMessageMixin, CreateView):
+    model = KeySkill
+    template_name = "backend/resume/key-skill/form.html"
+    form_class = KeySkillForm
+    success_message = "KeySkill Created Successfully."
+    success_url = reverse_lazy('resume:key-skill.index')
+
+
+class KeySkillUpdate(SuccessMessageMixin, UpdateView):
+    model = KeySkill
+    template_name = "backend/resume/key-skill/form.html"
+    form_class = KeySkillForm
+    success_message = "KeySkill Updated Successfully."
+    success_url = reverse_lazy('resume:key-skill.index')
+
+
+class KeySkillDelete(SuccessMessageMixin, DeleteView):
+    model = KeySkill
+    template_name = "backend/layouts/deletePopUp.html"
+    success_message = "KeySkill Deleted Successfully."
+    success_url = reverse_lazy('resume:key-skill.index')
