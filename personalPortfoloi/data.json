@@ -40,7 +40,7 @@
     "Machine Learning Model": {
       "description": "Build simple predictive models using Python libraries like Scikit-learn.",
       "icon": "fa-solid fa-brain",
-      "background": "bg-prink"
+      "background": "bg-catkrill"
     },
     "Data Visualization": {
       "description": "Create charts and graphs to visualize insights using tools like Tableau or Python.",
@@ -50,7 +50,7 @@
     "Data Cleaning": {
       "description": "Prepare raw data for analysis by cleaning and organizing datasets.",
       "icon": "fa-solid fa-broom",
-      "background": "bg-catkrill"
+      "background": "bg-prink"
     },
     "ETL Developer": {
       "description": "Extract, transform, and load data from various sources into business intelligence systems.",
@@ -80,7 +80,7 @@
     "Data Entry Automation": {
       "description": "Automate repetitive data-related tasks with scripting and tools.",
       "icon": "fa-solid fa-robot",
-      "background": "bg-prink"
+      "background": "bg-catkrill"
     },
     "Automation Script Developer": {
       "description": "Write scripts to automate workflows and repetitive tasks efficiently.",
