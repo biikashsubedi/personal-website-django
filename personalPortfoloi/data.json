@@ -3,6 +3,7 @@
   "job_title": "Developer",
   "phone1": "+9779869286303",
   "email1": "bikash_subedi@outlook.com",
+  "location": "Kathmandu, Nepal",
   "introduction": "<h4>'This is Bikash Subedi's website, and this is a bit of copy about him, It's not enough intro about him.'</h4><p>Bikash is in IT Faculty, He has a lots of knowledge about Digital World, Content &amp; Contents Rules, Cyber Security, Programming, Cisco, Web, (AND MORE): Active in Podcasts, Videos, Ebooks, Webinars: That Engage Customers and Ignite Your Business (Professional With Champion)</p><p>His company, BikkizTweau, is a IT training and education company with more than 600,000 subscribers.</p><p>BikkizTweau trains worldwide through its online and in-person education programs.</p><p>Her previous company, ClickZ, is one of the first sources of information in the world. He left it in 2018, a lifetime ago in Internet years.</p><p>Bikash was cited as a top thought leader.</p><p>Bikash is the world’s first Chief Content Officer and an acclaimed writer and communicator.</p><p>Bikash lives in Chitwan, where he stay with family and have beautiful girlfriend.</p>",
   "website": "https://www.bikashsubedi.com.np",
   "facebook_link": "https://www.facebook.com/biikashsubedi0",
@@ -26,37 +27,37 @@
       "icon": "fa-solid fa-code-branch",
       "background": "bg-catkrill"
     },
-    "Web Scraping Specialist": {
-      "description": "Extract and process data from websites using tools like BeautifulSoup or Scrapy.",
-      "icon": "fa-solid fa-spider",
-      "background": "bg-prink"
-    },
-    "SEO and Website Optimization Specialist": {
+    "SEO and Website Optimization": {
       "description": "Optimize website performance and rankings for search engines.",
       "icon": "fa-solid fa-chart-line",
       "background": "bg-prink"
     },
-    "Data Visualization Specialist": {
+    "Web Scraping": {
+      "description": "Extract and process data from websites using tools like BeautifulSoup or Scrapy.",
+      "icon": "fa-solid fa-spider",
+      "background": "bg-prink"
+    },
+    "Machine Learning Model": {
+      "description": "Build simple predictive models using Python libraries like Scikit-learn.",
+      "icon": "fa-solid fa-brain",
+      "background": "bg-prink"
+    },
+    "Data Visualization": {
       "description": "Create charts and graphs to visualize insights using tools like Tableau or Python.",
       "icon": "fa-solid fa-chart-bar",
       "background": "bg-catkrill"
     },
-    "Data Cleaning Specialist": {
+    "Data Cleaning": {
       "description": "Prepare raw data for analysis by cleaning and organizing datasets.",
       "icon": "fa-solid fa-broom",
       "background": "bg-catkrill"
-    },
-    "Machine Learning Model Developer": {
-      "description": "Build simple predictive models using Python libraries like Scikit-learn.",
-      "icon": "fa-solid fa-brain",
-      "background": "bg-prink"
     },
     "ETL Developer": {
       "description": "Extract, transform, and load data from various sources into business intelligence systems.",
       "icon": "fa-solid fa-database",
       "background": "bg-prink"
     },
-    "Data Annotation Specialist": {
+    "Data Annotation": {
       "description": "Label data for supervised learning tasks in machine learning projects.",
       "icon": "fa-solid fa-tag",
       "background": "bg-catkrill"
@@ -66,7 +67,7 @@
       "icon": "fa-solid fa-cogs",
       "background": "bg-catkrill"
     },
-    "Cloud Support Associate": {
+    "Cloud Support": {
       "description": "Manage and provide support for cloud services on platforms like AWS.",
       "icon": "fa-solid fa-cloud",
       "background": "bg-prink"
@@ -76,7 +77,7 @@
       "icon": "fa-solid fa-hdd",
       "background": "bg-prink"
     },
-    "Data Entry Automation Specialist": {
+    "Data Entry Automation": {
       "description": "Automate repetitive data-related tasks with scripting and tools.",
       "icon": "fa-solid fa-robot",
       "background": "bg-prink"
@@ -107,10 +108,25 @@
     "Cyber Security As Guest<span> /  2075 <br></span>": "Computer security, cybersecurity or information technology security (IT security) is the protection of computer systems from theft or damage to their hardware, software or electronic data, as well as from disruption or misdirection of the services they provide"
   },
   "links": {
-    "about": "/",
-    "profile": "profile",
-    "works": "works",
-    "blogs": "blogs",
-    "contact": "contact"
+    "about": {
+      "url": "/",
+      "icon": "fa-address-card"
+    },
+    "profile": {
+      "url": "profile",
+      "icon": "fa-file-user"
+    },
+    "works": {
+      "url": "works",
+      "icon": "fa-briefcase"
+    },
+    "blogs": {
+      "url": "blogs",
+      "icon": "fa-newspaper"
+    },
+    "contact": {
+      "url": "contact",
+      "icon": "fa-address-book"
+    }
   }
 }

@@ -28,6 +28,7 @@ def ExtractData(request):
             Education.objects.all().delete()
             Experience.objects.all().delete()
             Link.objects.all().delete()
+            Skill.objects.all().delete()
 
             checkExists = Profile.objects.filter(name=data['name']).exists()
             if not checkExists:
@@ -36,6 +37,7 @@ def ExtractData(request):
                     job_title=data['job_title'],
                     phone1=data['phone1'],
                     email1=data['email1'],
+                    location=data['location'],
                     introduction=data['introduction'],
                     website=data['website'],
                     facebook_link=data['facebook_link'],
@@ -94,7 +96,8 @@ def ExtractData(request):
                 if not checkExists:
                     checkExists = Link(
                         label=index,
-                        url=value
+                        url=value['url'],
+                        icon=value['icon']
                     )
                     checkExists.save()
 

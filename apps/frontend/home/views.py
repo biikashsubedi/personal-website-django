@@ -15,9 +15,6 @@ class HomeView(ListView):
         context = super().get_context_data(**kwargs)
         context['object_list'] = {}
         context['skills'] = Skill.objects.filter(status=True).all()
-        context['experiences'] = Experience.objects.filter(status=True, type='text').all()
-        context['experienceNumbers'] = Experience.objects.filter(status=True, type='number').all()
-        context['educations'] = Education.objects.filter(status=True).all()
         context['activeUrl'] = about
 
         return context
