@@ -7,6 +7,8 @@ from django.utils.translation import gettext_lazy as _
 
 class Education(models.Model):
     label = models.CharField(_("label"), max_length=200, blank=True, null=True)
+    year = models.CharField(_("year"), max_length=200, blank=True, null=True)
+    location = models.CharField(_("location"), max_length=200, blank=True, null=True)
     value = models.TextField(_("value"), blank=True, null=True)
     status = models.BooleanField(_('status'), default=True)
     position = models.IntegerField(_("position"), blank=True, null=True)
@@ -23,6 +25,8 @@ class Education(models.Model):
 class Experience(models.Model):
     label = models.CharField(_("label"), max_length=200, blank=True, null=True)
     type = models.CharField(_("Type"), max_length=200, blank=True, null=True)
+    year = models.CharField(_("year"), max_length=200, blank=True, null=True)
+    location = models.CharField(_("location"), max_length=200, blank=True, null=True)
     value = models.TextField(_("value"), blank=True, null=True)
     status = models.BooleanField(_('status'), default=True)
     position = models.IntegerField(_("position"), blank=True, null=True)

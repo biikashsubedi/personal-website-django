@@ -11,6 +11,8 @@ class EducationForm(ModelForm):
         model = Education
         fields = [
             'label',
+            'year',
+            'location',
             'value',
             'status',
             'position',
@@ -40,6 +42,8 @@ class ExperienceForm(ModelForm):
         fields = [
             'label',
             'type',
+            'year',
+            'location',
             'value',
             'status',
             'position',

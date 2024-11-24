@@ -67,6 +67,8 @@ def ExtractData(request):
                 if not checkExists:
                     checkExists = Education(
                         label=index,
+                        year=value,
+                        location=value,
                         value=value
                     )
                     checkExists.save()
@@ -87,6 +89,8 @@ def ExtractData(request):
                     checkExists = Experience(
                         label=index,
                         type='text',
+                        year=value,
+                        location=value,
                         value=value
                     )
                     checkExists.save()

@@ -89,9 +89,18 @@
     }
   },
   "educations": {
-    "Shree Laxmi Higher Secondary School<span> / 2068</span>": "In our nepali education system, SLC is most popular and gives a high priority for those student who alresdy completed SLC exam. In the year 2068, i have completed my SLC exam and that was the wounderful day for me.",
-    "Shree Laxmi Higher Secondary School<span> / 2069 -  2071</span>": "To complete my grade 11 and 12, i used same college because that was the most popular college at that time and all the lectures are to much closer.",
-    "University of Leeds Beckett<span> / -2075</span>": "I have been graduated from the university of LeedsBeckett, which is the top university in the world. i used BSC-IT in Bachelor, thats attractive subjects for me because i love degital world."
+    "Shree Laxmi Higher Secondary School": {
+      "year": "",
+      "location": ""
+    },
+    "Shree Laxmi Higher Secondary School ": {
+      "year": "",
+      "location": ""
+    },
+    "University of Leeds Beckett": {
+      "year": "",
+      "location": ""
+    }
   },
   "experienceNumbers": {
     "Linux System": "60%",
@@ -102,10 +111,7 @@
     "Coding": "85%"
   },
   "experiences": {
-    "Linux Distributor<span> / October 2074<br></span>": "It's an operating system made from a software collection, which is based upon the Linux kernel and, often, a package management system. Linux users usually obtain their operating system by downloading one of the Linux distributions, which are available for a wide variety of system.",
-    "Senior Web Developer<span> / September 2074<br></span>": "Web developers are found working in various types of organizations, including large corporations and governments, small and medium - sized companies, or alone as freelancers. Some web developers work for one organization as a permanent full-time employee, while others may work as independent consultants, or as contractors for an employment agency.",
-    "Laravel Developer<span> / October 2075 - November 2011<br></span>": "Laravel is a free, open-source[3] PHP web framework, created by Taylor Otwell and intended for the development of web applications following the model–view–controller (MVC) architectural pattern and based on Symfony. Some of the features of Laravel are a modular packaging system with a dedicated dependency manager, different ways for accessing relational databases, utilities that aid in application deployment and maintenance.",
-    "Cyber Security As Guest<span> /  2075 <br></span>": "Computer security, cybersecurity or information technology security (IT security) is the protection of computer systems from theft or damage to their hardware, software or electronic data, as well as from disruption or misdirection of the services they provide"
+
   },
   "links": {
     "about": {
