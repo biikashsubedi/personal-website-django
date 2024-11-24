@@ -34,6 +34,7 @@
                                                         </div>
                                                     {% elif field.html_name == 'value' %}
                                                         {{ form.value }}
+                                                        {{ form.media }}
                                                     {% else %}
                                                         <input type="{{ field.field.widget.input_type }}"
                                                                name="{{ field.html_name }}"

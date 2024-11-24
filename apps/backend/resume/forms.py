@@ -1,3 +1,4 @@
+from ckeditor.widgets import CKEditorWidget
 from django import forms
 from django.forms import ModelForm
 from .models import *
@@ -46,8 +47,7 @@ class KeySkillForm(ModelForm):
 
 
 class ExperienceForm(ModelForm):
-    value = forms.CharField(label='value',
-                            widget=forms.Textarea(attrs={'class': "form-control", 'rows': "4"}))
+    value = forms.CharField(widget=CKEditorWidget(attrs={'class': "form-control"}))
     class Meta:
         model = Experience
         fields = [

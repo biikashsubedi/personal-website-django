@@ -1,3 +1,4 @@
+from ckeditor.fields import RichTextField
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -28,7 +29,9 @@ class Experience(models.Model):
     type = models.CharField(_("Type"), max_length=200, blank=True, null=True)
     year = models.CharField(_("year"), max_length=200, blank=True, null=True)
     location = models.CharField(_("location"), max_length=200, blank=True, null=True)
-    value = models.TextField(_("value"), blank=True, null=True)
+    company = models.CharField(_("company"), max_length=200, blank=True, null=True)
+    background = models.CharField(_("background"), max_length=200, blank=True, null=True)
+    value = RichTextField(blank=True, null=True)
     status = models.BooleanField(_('status'), default=True)
     position = models.IntegerField(_("position"), blank=True, null=True)
     details = models.JSONField(_("details"), blank=True, null=True)

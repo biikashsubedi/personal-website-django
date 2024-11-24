@@ -76,7 +76,6 @@ def ExtractData(request):
                     checkExists.save()
 
             for index in data['keySkills']:
-                print(index)
                 checkExists = KeySkill.objects.filter(label=index).exists()
                 if not checkExists:
                     checkExists = KeySkill(
@@ -90,10 +89,10 @@ def ExtractData(request):
                 if not checkExists:
                     checkExists = Experience(
                         label=index,
-                        type='text',
-                        year=value,
-                        location=value,
-                        value=value
+                        year=value['year'],
+                        company=value['company'],
+                        background=value['background'],
+                        value=" "
                     )
                     checkExists.save()
 
@@ -112,9 +111,6 @@ def ExtractData(request):
 
 
     except Exception as e:
-        print('=============================================================================================================')
-        print(f"str{e}")
-        print('=============================================================================================================')
         messages.success(request, 'Unable to set default data.')
         return redirect(reverse('profile:index'))
 

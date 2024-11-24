@@ -43,37 +43,38 @@
             {% endif %}
 
 
+            {% if experiences %}
+                <div class="section-wrapper pl-60 pr-60 mb-60">
+                    <div class="col-xl-12">
+                        <div class="bostami-section-title-wrap mb-20">
+                            <h4 class="section-title"><i class="fa-light fa-briefcase"></i>experience</h4>
+                        </div>
 
-            <div class="section-wrapper pl-60 pr-60 mb-60">
+                        <style>
+                            ul {
+                                list-style-type: disc;
+                                padding-left: 20px;
+                                padding-top: 10px;
+                            }
+                        </style>
 
 
-                <div class="col-xl-6 col-lg-5">
-                    <div class="bostami-section-title-wrap mb-20">
-                        <h4 class="section-title"><i class="fa-light fa-briefcase"></i>experience</h4>
+                        {% for experience in experiences %}
+                            <div class="bostami-card-item {{ experience.background }}  mb-20">
+                                <span class="card-subtitle">{{ experience.year }}</span>
+                                <h6 class="card-title"
+                                    style="font-weight: bold !important;">{{ experience.label|title }}</h6>
+
+                                <p class="card-text">
+                                    {{ experience.value|safe }}
+                                </p>
+
+                            </div>
+                        {% endfor %}
+
                     </div>
-
-                    <div class="bostami-card-item bg-catkrill  mb-20">
-                        <span class="card-subtitle">2019 - Present</span>
-                        <h6 class="card-title">Sr. Software Tester</h6>
-                        <p class="card-text">Google Inc.</p>
-                    </div>
-
-                    <div class="bostami-card-item bg-prink mb-20">
-                        <span class="card-subtitle">2015-2017</span>
-                        <h6 class="card-title">Cr. Web Developer</h6>
-                        <p class="card-text">elite-themes24 ltd.</p>
-                    </div>
-
-                    <div class="bostami-card-item bg-catkrill ">
-                        <span class="card-subtitle">2014 - 2015</span>
-                        <h6 class="card-title">Jr. Web Developer</h6>
-                        <p class="card-text">Creative Gigs.</p>
-                    </div>
-
                 </div>
-
-
-            </div>
+            {% endif %}
 
             {% if keySkills %}
                 <div class="section-wrapper bg-light-white-2 pt-70 pb-60 pl-60 pr-60">

@@ -29,6 +29,7 @@ class ResumeView(ListView):
         context['object_list'] = {}
         context['educations'] = Education.objects.filter(status=True).order_by('position')
         context['keySkills'] = KeySkill.objects.filter(status=True).order_by('position')
+        context['experiences'] = Experience.objects.filter(status=True).order_by('position')
         context['activeUrl'] = profile
 
         return context
