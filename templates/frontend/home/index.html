@@ -10,77 +10,54 @@
             <div class="section-wrapper pl-60 pr-60 pt-60">
                 <div class="bostami-page-title-wrap mb-35">
                     <h2 class="page-title">about</h2>
-                   {{ profile.introduction|safe }}
+                    {{ profile.introduction|safe }}
                 </div>
             </div>
 
-            <!-- what-do -->
-            <div class="section-wrapper pl-60 pr-60">
+            {% if skills.count %}
+                <div class="section-wrapper pl-60 pr-60">
+                    <div class="bostami-section-title-wrap mb-30">
+                        <h3 class="section-title">What I do!</h3>
+                    </div>
+                    <div class="bostami-what-do-wrap mb-30">
+                        <div class="row">
 
-                <div class="bostami-section-title-wrap mb-30">
-                    <h3 class="section-title">What I do!</h3>
-                </div>
+                            {% for skill in skills %}
 
-                <div class="bostami-what-do-wrap mb-30">
-                    <div class="row">
-
-                        <!-- single item -->
-                        <div class="col-xxl-6 col-xl-6 col-lg-6">
-                            <div class="bostami-what-do-item bg-prink">
-                                <div class="icon">
-                                    <i class="fa-light fa-swatchbook"></i>
+                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                    <div class="bostami-what-do-item {{ skill.background }}">
+                                        <div class="icon">
+                                            <i class="{{ skill.icon }}"></i>
+                                        </div>
+                                        <div class="text">
+                                            <h4 class="title">Web Development</h4>
+                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
+                                                euismod tincidunt volutpat.</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="text">
-                                    <h4 class="title">Ui/Ux Design</h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-                                        euismod tincidunt volutpat.</p>
+
+                            {% endfor %}
+
+
+                            <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                <div class="bostami-what-do-item bg-catkrill">
+                                    <div class="icon">
+                                        <i class="fa-regular fa-grid-2"></i>
+                                    </div>
+                                    <div class="text">
+                                        <h4 class="title">App Development</h4>
+                                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
+                                            euismod tincidunt volutpat.</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <!-- single item -->
-                        <div class="col-xxl-6 col-xl-6 col-lg-6">
-                            <div class="bostami-what-do-item bg-catkrill">
-                                <div class="icon">
-                                    <i class="fa-regular fa-grid-2"></i>
-                                </div>
-                                <div class="text">
-                                    <h4 class="title">App Development</h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-                                        euismod tincidunt volutpat.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- single item -->
-                        <div class="col-xxl-6 col-xl-6 col-lg-6">
-                            <div class="bostami-what-do-item  bg-catkrill">
-                                <div class="icon">
-                                    <i class="fa-regular fa-camera-retro"></i>
-                                </div>
-                                <div class="text">
-                                    <h4 class="title">Photography</h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-                                        euismod tincidunt volutpat.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- single item -->
-                        <div class="col-xxl-6 col-xl-6 col-lg-6">
-                            <div class="bostami-what-do-item bg-prink bg-blue">
-                                <div class="icon">
-                                    <i class="fa-regular fa-code"></i>
-                                </div>
-                                <div class="text">
-                                    <h4 class="title">Web Development</h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-                                        euismod tincidunt volutpat.</p>
-                                </div>
-                            </div>
-                        </div>
 
+
+                        </div>
                     </div>
                 </div>
-
-            </div>
+            {% endif %}
 
 
         </div>

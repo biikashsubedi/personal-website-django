@@ -25,6 +25,8 @@ class SkillForm(ModelForm):
         fields = [
             'label',
             'value',
+            'icon',
+            'background',
             'status',
             'position',
         ]

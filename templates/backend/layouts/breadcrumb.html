@@ -32,28 +32,8 @@
         <div class="d-flex">
             <div class="justify-content-center">
                 {% if title == 'Profile' %}
-                    <button class="float-right btn btn-sm btn-danger ml-2" onclick="window.location='{% url 'home:profile.data'  %}'"><i
-                            class="fa fa-recycle"></i> Set Default Data
-                    </button>
-                {% endif %}
-                {% if title == 'Skill' %}
-                    <button class="float-right btn btn-sm btn-danger ml-2" onclick="window.location='{% url 'home:skill.data'  %}'"><i
-                            class="fa fa-recycle"></i> Set Default Data
-                    </button>
-                {% endif %}
-                {% if title == 'Education' %}
-                    <button class="float-right btn btn-sm btn-danger ml-2" onclick="window.location='{% url 'home:education.data'  %}'"><i
-                            class="fa fa-recycle"></i> Set Default Data
-                    </button>
-                {% endif %}
-                {% if title == 'Experience' %}
-                    <button class="float-right btn btn-sm btn-danger ml-2" onclick="window.location='{% url 'home:experience.data'  %}'"><i
-                            class="fa fa-recycle"></i> Set Default Data
-                    </button>
-                {% endif %}
-                {% if title == 'Link' %}
-                    <button class="float-right btn btn-sm btn-danger ml-2" onclick="window.location='{% url 'home:links.data'  %}'"><i
-                            class="fa fa-recycle"></i> Set Default Data
+                    <button class="float-right btn btn-sm btn-danger ml-2" onclick="window.location='{% url 'home:extract.data'  %}'"><i
+                            class="fa fa-recycle"></i> Extract Default Data
                     </button>
                 {% endif %}
                 <button class="float-right btn btn-sm btn-success ml-2" onclick="window.location='create'"><i
