@@ -5,7 +5,7 @@
 
             <!-- img -->
             <div class="bostami-parsonal-info-img">
-                <img src="{% static 'frontend/assets/img/parsonal-info/parson-img-1.png' %}" alt="avatar">
+                <img src="{{ profile.image.url }}" alt="avatar">
             </div>
 
             <!-- name -->
@@ -20,28 +20,28 @@
             <ul class="bostami-parsonal-info-social-link mb-30">
                 {% if profile.facebook_link %}
                     <li>
-                        <a href="{{ profile.facebook_link }}" class="facebook">
+                        <a href="{{ profile.facebook_link }}" class="facebook" target="_blank">
                             <i class="fa-brands fa-facebook-f"></i>
                         </a>
                     </li>
                 {% endif %}
                 {% if profile.twitter_link %}
                     <li>
-                        <a href="{{ profile.twitter_link }}" class="twitter">
+                        <a href="{{ profile.twitter_link }}" class="twitter" target="_blank">
                             <i class="fa-brands fa-twitter"></i>
                         </a>
                     </li>
                 {% endif %}
                 {% if profile.instagram_link %}
                     <li>
-                        <a href="{{ profile.instagram_link }}" class="instagram">
+                        <a href="{{ profile.instagram_link }}" class="instagram" target="_blank">
                             <i class="fa-brands fa-instagram"></i>
                         </a>
                     </li>
                 {% endif %}
                 {% if profile.linkedin_link %}
                     <li>
-                        <a href="{{ profile.linkedin_link }}" class="linkedin">
+                        <a href="{{ profile.linkedin_link }}" class="linkedin" target="_blank">
                             <i class="fa-brands fa-linkedin-in"></i>
                         </a>
                     </li>
@@ -95,16 +95,13 @@
                 {% endif %}
             </div>
 
-            
-
-
             {% if profile.resume %}
                 <div class="bostami-parsonal-info-btn">
                     <a class="btn-1" href="{{ profile.resume.url }}" download>
                     <span class="icon">
                         <i class="fa-regular fa-download"></i>
                     </span>
-                        download cv
+                        download CV
                     </a>
                 </div>
             {% endif %}
