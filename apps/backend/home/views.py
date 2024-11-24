@@ -67,19 +67,10 @@ def ExtractData(request):
                 if not checkExists:
                     checkExists = Education(
                         label=index,
-                        year=value,
-                        location=value,
-                        value=value
-                    )
-                    checkExists.save()
-
-            for index, value in data['experienceNumbers'].items():
-                checkExists = Experience.objects.filter(label=index).exists()
-                if not checkExists:
-                    checkExists = Experience(
-                        label=index,
-                        type='number',
-                        value=value
+                        year=value['year'],
+                        location=value['location'],
+                        background=value['background'],
+                        value=value['value'],
                     )
                     checkExists.save()
 
@@ -110,6 +101,9 @@ def ExtractData(request):
 
 
     except Exception as e:
+        print('=============================================================================================================')
+        print(f"str{e}")
+        print('=============================================================================================================')
         messages.success(request, 'Unable to set default data.')
         return redirect(reverse('profile:index'))
 

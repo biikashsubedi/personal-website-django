@@ -14,7 +14,7 @@ class HomeView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['object_list'] = {}
-        context['skills'] = Skill.objects.filter(status=True).all()
+        context['skills'] = Skill.objects.filter(status=True).order_by('position')
         context['activeUrl'] = about
 
         return context
@@ -27,6 +27,7 @@ class ResumeView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['object_list'] = {}
+        context['educations'] = Education.objects.filter(status=True).order_by('position')
         context['activeUrl'] = profile
 
         return context

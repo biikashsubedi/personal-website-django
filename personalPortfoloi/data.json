@@ -89,29 +89,20 @@
     }
   },
   "educations": {
-    "Shree Laxmi Higher Secondary School": {
-      "year": "",
-      "location": ""
+    "Bachelor in Computer Science": {
+      "year": "September 2019",
+      "location": "Thapathali, Kathmandu",
+      "background": "bg-catkrill",
+      "value": "The British College (Leeds Beckett University)"
     },
-    "Shree Laxmi Higher Secondary School ": {
-      "year": "",
-      "location": ""
-    },
-    "University of Leeds Beckett": {
-      "year": "",
-      "location": ""
+    "Intermediate (+2) in Science": {
+      "year": "August 2013 - June 2015",
+      "location": "Jagatpur, Chitwan",
+      "background": "bg-prink",
+      "value": "Shree Laxmi Higher Secondary School"
     }
-  },
-  "experienceNumbers": {
-    "Linux System": "60%",
-    "Laravel": "90%",
-    "Dreamweaver": "80%",
-    "Design & Development": "100%",
-    "Illustrator": "60%",
-    "Coding": "85%"
-  },
+  }
   "experiences": {
-
   },
   "links": {
     "about": {
