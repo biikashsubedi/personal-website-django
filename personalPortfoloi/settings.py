@@ -131,7 +131,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR / 'media')
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-
 CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'
 
 CKEDITOR_UPLOAD_PATH = 'uploads/'
@@ -149,4 +148,13 @@ CKEDITOR_CONFIGS = {
         ],
         'width': 1000,
     }
+}
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    },
+    'cache-for-ratelimiting': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    },
 }
