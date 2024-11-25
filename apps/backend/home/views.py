@@ -17,11 +17,6 @@ from ..resume.views import KeySkillDelete
 
 # Create your views here.
 
-class HomeView(ListView):
-    model = Config
-    template_name = "backend/home/index.html"
-
-
 def ExtractData(request):
     try:
         with open('personalPortfoloi/data.json', 'r') as file:
@@ -85,7 +80,6 @@ def ExtractData(request):
                     )
                     checkExists.save()
 
-
             for index, value in data['experiences'].items():
                 checkExists = Experience.objects.filter(label=index).exists()
                 if not checkExists:
@@ -125,6 +119,11 @@ def ExtractData(request):
     except Exception as e:
         messages.success(request, 'Unable to set default data.')
         return redirect(reverse('profile:index'))
+
+
+class HomeView(ListView):
+    model = Config
+    template_name = "backend/home/index.html"
 
 
 class LinkIndex(ListView):
