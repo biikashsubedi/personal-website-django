@@ -7,12 +7,13 @@ urlpatterns = [
     path("admin/", admin.site.urls),
 
     # backend
-    path('', include('apps.backend.user.urls')),
-    path('', include('apps.backend.home.urls')),
-    path('portfolio/', include('apps.backend.portfoloi.urls')),
-    path('profiles/', include('apps.backend.profiles.urls')),
-    path('', include('apps.backend.resume.urls')),
-    path('contact-us/', include('apps.backend.contact.urls')),
+    path('system/', include('apps.backend.user.urls')),
+    path('system/', include('apps.backend.home.urls')),
+    path('system/portfolio/', include('apps.backend.portfoloi.urls')),
+    path('system/profiles/', include('apps.backend.profiles.urls')),
+    path('system/', include('apps.backend.resume.urls')),
+    path('system/contact-us/', include('apps.backend.contact.urls')),
+path('system/analytic/', include('apps.backend.analyticData.urls')),
 
     # frontend
     path('', include('apps.frontend.home.urls')),

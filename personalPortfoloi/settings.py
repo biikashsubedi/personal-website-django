@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'apps.backend.profiles',
     'apps.backend.resume',
     'apps.backend.user',
+    'apps.backend.analyticData',
 ]
 
 APPEND_SLASH = False
