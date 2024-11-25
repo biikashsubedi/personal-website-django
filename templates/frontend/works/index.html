@@ -1,7 +1,80 @@
 {% extends 'frontend/layouts/master.html' %}
 
+{% block style %}
+    <style>
+        .website-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            background: var(--theme-primary);
+        }
+
+        .logo-container {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: #f8f9fa;
+            border-radius: 16px;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .website-card:hover .logo-container {
+            transform: scale(1.1);
+        }
+
+        .logo-container img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .website-info {
+            text-align: center;
+        }
+
+        .website-name {
+            color: #2d3436;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .website-card:hover .website-name {
+            color: #00C9FF;
+        }
+
+        .website-url {
+            color: #636e72;
+            font-size: 0.9rem;
+            text-decoration: none;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .website-card:hover .website-url {
+            color: #92FE9D;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+{% endblock %}
 
 {% block content %}
+
+
+
 
     <div class="col-xxl-8 col-xl-9">
         <div class="bostami-page-content-wrap">
@@ -26,25 +99,29 @@
 
                     <div class="bostami-card-wrap">
                         <div class="row">
-                            {% for education in works %}
+                            {% for work in works %}
+
                                 <div class="col-xl-6 col-lg-7">
-                                    <div class="bostami-card-item {{ education.background }} mb-20">
-                                        <span class="card-subtitle">{{ education.year }}</span>
-                                        <h6 class="card-title"
-                                            style="font-weight: bold !important;">{{ education.label|title }}</h6>
-                                        <h6 class="card-text">{{ education.value|title }}</h6>
-                                        <p class="card-text">{{ education.location|title }}</p>
-                                    </div>
+                                    <a href="{{ work.url }}" target="_blank">
+                                        <div class="bostami-card-item {{ work.background }} mb-20 website-card">
+                                            <div class="logo-container">
+                                                <img src="{{ work.icon.url }}" alt="{{ work.label }} Logo">
+                                            </div>
+                                            <div class="website-info">
+                                                <div class="website-name">{{ work.label|title }}</div>
+                                                <a href="{{ work.url }}" class="website-url">{{ work.url }}</a>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
                             {% endfor %}
-
-
                         </div>
                     </div>
 
                 </div>
 
             {% endif %}
+        
 
         </div>
     </div>
