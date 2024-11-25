@@ -3,8 +3,8 @@
 
 
 {% block breadcrumb %}
-    {% url 'apikey:index' as the_url %}
-    {% include 'backend/layouts/breadcrumb.html' with title="Api Key" formPage=False route=the_url %}
+    {% url 'contactUs:index' as the_url %}
+    {% include 'backend/layouts/breadcrumb.html' with title="Contact Us" formPage=True showPage=True route=the_url %}
 {% endblock %}
 
 
@@ -23,33 +23,21 @@
                                     <thead>
                                     <tr>
                                         <th scope="col">S.N</th>
-                                        <th scope="col">Title</th>
-                                        <th scope="col">Key</th>
-                                        <th scope="col">Hits</th>
-                                        <th scope="col">status</th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col">name</th>
+                                        <th scope="col">email</th>
+                                        <th scope="col">phone</th>
+                                        <th scope="col">message</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     {% for apikey in object_list %}
                                         <tr>
                                             <td>{{ forloop.counter }} </td>
-                                            <td>{{ apikey.title }} </td>
-                                            <td>{{ apikey.key }} </td>
-                                            <td>{{ apikey.hits }} </td>
-                                            <td>
-                                                <span class="badge {% if apikey.status %} badge-success {% else %} badge-danger {% endif %}">
-                                                {{ apikey.status }}
-                                                </span>
-                                            </td>
-                                            <td>
-                                                <a href="{% url 'apikey:update' apikey.id %}">
-                                                    <button class="btn btn-primary"> Update</button>
-                                                </a>
-                                                <a href="{% url 'apikey:delete' apikey.id %}">
-                                                    <button class="btn btn-danger"> Delete</button>
-                                                </a>
-                                            </td>
+                                            <td>{{ apikey.name }} </td>
+                                            <td>{{ apikey.email }} </td>
+                                            <td>{{ apikey.phone }} </td>
+                                            <td>{{ apikey.message }} </td>
+
 
                                         </tr>
                                     {% endfor %}

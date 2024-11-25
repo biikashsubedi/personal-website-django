@@ -12,6 +12,7 @@ urlpatterns = [
     path('portfolio/', include('apps.backend.portfoloi.urls')),
     path('profiles/', include('apps.backend.profiles.urls')),
     path('', include('apps.backend.resume.urls')),
+    path('contact-us/', include('apps.backend.contact.urls')),
 
     # frontend
     path('', include('apps.frontend.home.urls')),
