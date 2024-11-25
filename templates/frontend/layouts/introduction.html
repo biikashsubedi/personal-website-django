@@ -72,7 +72,8 @@
                         </div>
                         <div class="text">
                             <span>Email</span>
-                            <p><a href="mailto:{{ profile.email1|lower }}">{{ profile.email1|lower }}</a></p>
+                            <p><a style="text-transform: lowercase !important;"
+                                  href="mailto:{{ profile.email1|lower }}">{{ profile.email1 }}</a></p>
                             {% if profile.email2 %}
                                 <p><a href="mailto:{{ profile.email2|lower }}">{{ profile.email2|lower }}</a></p>
                             {% endif %}

@@ -191,5 +191,19 @@
       "url": "contact",
       "icon": "fa-address-book"
     }
+  },
+  "projects": {
+    "KFC Nepal": {
+      "url": "https://www.kfc.com.np",
+      "background": "bg-catkrill"
+    },
+    "Merokinmel": {
+      "url": "https://www.merokinmel.com",
+      "background": "bg-prink"
+    },
+    "Foodmood": {
+      "url": "https://www.foodmood.com.np",
+      "background": "bg-prink"
+    }
   }
 }
