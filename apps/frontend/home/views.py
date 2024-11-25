@@ -1,6 +1,9 @@
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
 from django.views.generic import ListView
 
 from personalPortfoloi.metaData import *
+from ...backend.contact.models import ContactUs
 from ...backend.home.models import Config
 from ...backend.resume.models import *
 
@@ -70,3 +73,21 @@ class ContactView(ListView):
         context['activeUrl'] = contact
 
         return context
+
+
+@require_POST
+# @ratelimit(key='ip', rate='1/h')
+def store_contact_us(request):
+    if getattr(request, 'limited', False):
+        return JsonResponse({'status': False, 'message': 'More requests detected, please try again.'}, status=429)
+
+    try:
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        message = request.POST.get('message')
+        ContactUs.objects.create(name=name, email=email, phone=phone, message=message)
+
+        return JsonResponse({'status': True, 'message': 'Thanks for contacting us. We will reach you soon!'})
+    except Exception as e:
+        return JsonResponse({'status': False}, status=400)

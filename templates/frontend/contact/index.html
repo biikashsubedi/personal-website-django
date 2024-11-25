@@ -301,33 +301,6 @@
             </div>
         </div>
 
-        <script>
-            function handleSubmit(event) {
-                event.preventDefault();
-                const form = document.getElementById('contactForm');
-                const nameInput = form.querySelector('input[name="name"]').value;
-                const phoneInput = form.querySelector('input[name="phone"]').value;
-                const emailInput = form.querySelector('input[name="email"]').value;
-                const messageInput = form.querySelector('textarea').value;
-                const successMessage = document.querySelector('.success-message');
-                const spinner = document.querySelector('.spinner');
-                const submitBtn = document.querySelector('.submit-btn span');
-                const submitIcon = document.querySelector('.submit-btn svg');
-
-                console.log(nameInput, emailInput, phoneInput, messageInput)
-
-                // Show loading state
-                spinner.style.display = 'block';
-                submitBtn.style.opacity = '0';
-                submitIcon.style.display = 'none';
-
-                // Simulate form submission
-                setTimeout(() => {
-                    form.style.display = 'none';
-                    successMessage.classList.add('show');
-                }, 2000);
-            }
-        </script>
 
     </div>
 
@@ -335,4 +308,58 @@
 
 
 
+{% endblock %}
+
+{% block scripts %}
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            const form = document.getElementById('contactForm');
+            const successMessage = document.querySelector('.success-message');
+            const spinner = document.querySelector('.spinner');
+            const submitBtn = document.querySelector('.submit-btn span');
+            const submitIcon = document.querySelector('.submit-btn svg');
+
+            // Show loading state
+            spinner.style.display = 'block';
+            submitBtn.style.opacity = '0';
+            submitIcon.style.display = 'none';
+
+            const formData = new FormData(form);
+
+            fetch('{% url 'frontend:store_contact_us' %}', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRFToken': `{{ csrf_token }}`
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    form.reset();
+                    if (data.status === true) {
+                        form.style.display = 'none';
+                        successMessage.classList.add('show');
+                        return
+                    }
+                    if (data.status === false) {
+                        Toast.fire({
+                            icon: 'error',
+                            title: data.message
+                        })
+                        console.log(data.message)
+                    }
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Error Occurred! Please try again.'
+                    })
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+
+        }
+    </script>
 {% endblock %}

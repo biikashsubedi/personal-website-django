@@ -1,0 +1,35 @@
+<style>
+    .custom-toast {
+        margin-top: 80px !important;
+    }
+</style>
+
+
+<script>
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        },
+        customClass: {
+            popup: 'custom-toast'
+        }
+    })
+
+    {% if messages %}
+        {% for message in messages %}
+            Toast.fire({
+                icon: 'success',
+                title: '{{ message }}'
+            })
+
+        {% endfor %}
+
+    {% endif %}
+</script>
