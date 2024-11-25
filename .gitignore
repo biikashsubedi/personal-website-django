@@ -88,9 +88,7 @@ db.sqlite3
 
 test.json
 
-apps/backend/user/migrations/
-apps/backend/contact/migrations/
-apps/backend/home/migrations/
-apps/backend/portfoloi/migrations/
-apps/backend/profiles/migrations/
-apps/backend/resume/migrations/
+apps/backend/*/migrations/*
+!apps/backend/*/migrations/__init__.py
+
+staticfiles
