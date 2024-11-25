@@ -30,6 +30,7 @@ def ExtractData(request):
             Experience.objects.all().delete()
             Link.objects.all().delete()
             Skill.objects.all().delete()
+            Project.objects.all().delete()
 
             checkExists = Profile.objects.filter(name=data['name']).exists()
             if not checkExists:
