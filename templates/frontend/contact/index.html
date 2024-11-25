@@ -1,6 +1,223 @@
 {% extends 'frontend/layouts/master.html' %}
 
 
+{% block style %}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            background: #f5f5f5;
+            padding: 2rem;
+        }
+
+        .contact-container {
+            position: relative;
+            max-width: 100%;
+            width: 100%;
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        /* Decorative elements */
+        .contact-container::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 100px;
+            height: 100px;
+            background: #3b82f6;
+            border-radius: 50%;
+            opacity: 0.1;
+        }
+
+        .contact-container::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: -50px;
+            width: 120px;
+            height: 120px;
+            background: #8b5cf6;
+            border-radius: 50%;
+            opacity: 0.1;
+        }
+
+        .header {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .title {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: #6b7280;
+            font-size: 1rem;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            fill: #9ca3af;
+            transition: all 0.3s ease;
+        }
+
+        .textarea-icon {
+            top: 1.2rem;
+            transform: none;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .form-input::placeholder {
+            color: #9ca3af;
+        }
+
+        .form-input:focus {
+            border-color: #3b82f6;
+            background: #eff6ff;
+        }
+
+        .form-input:focus + .input-icon {
+            fill: #3b82f6;
+        }
+
+        textarea.form-input {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .submit-btn:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Success message styles */
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .success-icon {
+            width: 60px;
+            height: 60px;
+            fill: #10b981;
+            margin-bottom: 1rem;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Loading spinner */
+        .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ffffff;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .form-input.error {
+            border-color: #ef4444;
+        }
+
+        .error-message {
+            display: none;
+            color: #ef4444;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+    </style>
+{% endblock %}
 {% block content %}
 
 
@@ -14,35 +231,107 @@
                 </div>
             </div>
 
-            <!-- contact form -->
-            <div class="section-wrapper pr-60 pl-60 mb-60">
-                <div class="contact-area bg-light-white-2">
-                    <h5 class="contact-title">I'm always open to discussing produuct</h5>
-                    <h5 class="contact-title-b">design work or partnerships.</h5>
-                    <form class="contact-form" action="" method="post">
-                        <div class="form-input-item mb-60">
-                            <label class="input-lebel name">name *</label>
-                            <input name="name" class="input-box name" type="text" required>
-                        </div>
-                        <div class="form-input-item mb-60">
-                            <label class="input-lebel gmail">Email *</label>
-                            <input name="email" class="input-box gmail" type="Email" required>
-                        </div>
-                        <div class="form-input-item mb-40">
-                            <label class="input-lebel message">Message *</label>
-                            <textarea name="message" class="input-box message" cols="30"
-                                      rows="10"></textarea>
-                        </div>
-                        <div class="form-btn-wrap">
-                            <button type="submit" value="Send" class="form-btn">submit</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
 
         </div>
+
+        <div class="contact-container">
+            <div class="header">
+                <h2 class="title">Let's Connect</h2>
+                <p class="subtitle">I'm always open to discussing new projects and ideas.</p>
+            </div>
+
+            <form id="contactForm" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <input type="text" class="form-input" placeholder="Your Name" required name="name">
+                    <svg class="input-icon" viewBox="0 0 24 24">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span class="error-message">Please enter your name</span>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" class="form-input" placeholder="Your Phone" required name="phone">
+                    <svg class="input-icon phone-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                         fill="none" stroke-width="2" stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <path d="M22 16.92V19a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.35 19.66 19.66 0 0 1-6-6A19.86 19.86 0 0 1 3 4.18 2 2 0 0 1 5 2h2.09a2 2 0 0 1 2 1.72 12.05 12.05 0 0 0 .57 2.52 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.56-1.56a2 2 0 0 1 2.11-.45 12.05 12.05 0 0 0 2.52.57 2 2 0 0 1 1.72 2z"></path>
+                    </svg>
+
+                    <span class="error-message">Please enter a valid phone</span>
+                </div>
+
+                <div class="form-group">
+                    <input type="email" class="form-input" placeholder="Your Email" required name="email">
+                    <svg class="input-icon email-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+
+                    <span class="error-message">Please enter a valid email</span>
+                </div>
+
+                <div class="form-group">
+                    <textarea class="form-input" placeholder="Your Message" required name="message"></textarea>
+                    <svg class="input-icon textarea-icon" viewBox="0 0 24 24">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    <span class="error-message">Please enter your message</span>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <span>Send Message</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                    <div class="spinner"></div>
+                </button>
+            </form>
+
+            <div class="success-message">
+                <svg class="success-icon" viewBox="0 0 24 24">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                <h3 style="font-size: 1.5rem; color: #1f2937; margin-bottom: 0.5rem;">Thank you!</h3>
+                <p style="color: #6b7280">Your message has been sent successfully.</p>
+            </div>
+        </div>
+
+        <script>
+            function handleSubmit(event) {
+                event.preventDefault();
+                const form = document.getElementById('contactForm');
+                const nameInput = form.querySelector('input[name="name"]').value;
+                const phoneInput = form.querySelector('input[name="phone"]').value;
+                const emailInput = form.querySelector('input[name="email"]').value;
+                const messageInput = form.querySelector('textarea').value;
+                const successMessage = document.querySelector('.success-message');
+                const spinner = document.querySelector('.spinner');
+                const submitBtn = document.querySelector('.submit-btn span');
+                const submitIcon = document.querySelector('.submit-btn svg');
+
+                console.log(nameInput, emailInput, phoneInput, messageInput)
+
+                // Show loading state
+                spinner.style.display = 'block';
+                submitBtn.style.opacity = '0';
+                submitIcon.style.display = 'none';
+
+                // Simulate form submission
+                setTimeout(() => {
+                    form.style.display = 'none';
+                    successMessage.classList.add('show');
+                }, 2000);
+            }
+        </script>
+
     </div>
+
+
 
 
 
