@@ -11,4 +11,6 @@ urlpatterns = [
     path('link/create/', LinkCreate.as_view(), name='link.create'),
     path('link/update/<str:pk>', LinkUpdate.as_view(), name='link.update'),
     path('link/delete/<str:pk>', LinkDelete.as_view(), name='link.delete'),
+
+    path('cache-clear/', clear_cache, name='clear.cache'),
 ]

@@ -1,6 +1,7 @@
 import json
 
 from django.contrib.messages.views import SuccessMessageMixin
+from django.core.cache import cache
 from django.shortcuts import redirect
 
 from .forms import LinkForm
@@ -152,3 +153,14 @@ class LinkDelete(SuccessMessageMixin, DeleteView):
     template_name = "backend/layouts/deletePopUp.html"
     success_message = "Link Deleted Successfully."
     success_url = reverse_lazy('home:link.index')
+
+
+def clear_cache(request):
+    cache.clear()
+
+    previous_page_url = request.META.get('HTTP_REFERER', None)
+    messages.success(request, 'Cache has been cleared.')
+    if previous_page_url:
+        return redirect(previous_page_url)
+    else:
+        return redirect('home:index')
