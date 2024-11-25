@@ -23,4 +23,9 @@ urlpatterns = [
     path('key-skill/update/<str:pk>', KeySkillUpdate.as_view(), name='key-skill.update'),
     path('key-skill/delete/<str:pk>', KeySkillDelete.as_view(), name='key-skill.delete'),
 
+    path('project/', ProjectIndex.as_view(), name='project.index'),
+    path('project/create/', ProjectCreate.as_view(), name='project.create'),
+    path('project/update/<str:pk>', ProjectUpdate.as_view(), name='project.update'),
+    path('project/delete/<str:pk>', ProjectDelete.as_view(), name='project.delete'),
+
 ]

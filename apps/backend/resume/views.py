@@ -59,6 +59,7 @@ class ExperienceDelete(SuccessMessageMixin, DeleteView):
     success_message = "Experience Deleted Successfully."
     success_url = reverse_lazy('resume:experience.index')
 
+
 class SkillIndex(ListView):
     model = Skill
     template_name = "backend/resume/skill/index.html"
@@ -86,6 +87,7 @@ class SkillDelete(SuccessMessageMixin, DeleteView):
     success_message = "Skill Deleted Successfully."
     success_url = reverse_lazy('resume:skill.index')
 
+
 class KeySkillIndex(ListView):
     model = KeySkill
     template_name = "backend/resume/key-skill/index.html"
@@ -112,3 +114,31 @@ class KeySkillDelete(SuccessMessageMixin, DeleteView):
     template_name = "backend/layouts/deletePopUp.html"
     success_message = "KeySkill Deleted Successfully."
     success_url = reverse_lazy('resume:key-skill.index')
+
+
+class ProjectIndex(ListView):
+    model = Project
+    template_name = "backend/resume/project/index.html"
+
+
+class ProjectCreate(SuccessMessageMixin, CreateView):
+    model = Project
+    template_name = "backend/resume/project/form.html"
+    form_class = ProjectForm
+    success_message = "Project Created Successfully."
+    success_url = reverse_lazy('resume:project.index')
+
+
+class ProjectUpdate(SuccessMessageMixin, UpdateView):
+    model = Project
+    template_name = "backend/resume/project/form.html"
+    form_class = ProjectForm
+    success_message = "Project Updated Successfully."
+    success_url = reverse_lazy('resume:project.index')
+
+
+class ProjectDelete(SuccessMessageMixin, DeleteView):
+    model = Project
+    template_name = "backend/layouts/deletePopUp.html"
+    success_message = "Project Deleted Successfully."
+    success_url = reverse_lazy('resume:project.index')

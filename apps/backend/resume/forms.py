@@ -59,3 +59,16 @@ class ExperienceForm(ModelForm):
             'status',
             'position',
         ]
+
+
+class ProjectForm(ModelForm):
+    class Meta:
+        model = Project
+        fields = [
+            'label',
+            'url',
+            'icon',
+            'background',
+            'status',
+            'position',
+        ]

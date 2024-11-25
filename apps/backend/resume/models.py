@@ -72,3 +72,19 @@ class KeySkill(models.Model):
     class Meta:
         db_table = 'key_skills'
         verbose_name_plural = 'Key Skills'
+
+
+class Project(models.Model):
+    label = models.CharField(_("label"), max_length=200, blank=True, null=True)
+    url = models.CharField(_("url"), max_length=200, blank=True, null=True)
+    icon = models.ImageField(_('icon'), default='default/image.png', upload_to='projects')
+    background = models.TextField(_("background"), blank=True, null=True)
+    status = models.BooleanField(_('status'), default=True)
+    position = models.IntegerField(_("position"), blank=True, null=True)
+
+    def __str__(self):
+        return self.label
+
+    class Meta:
+        db_table = 'projects'
+        verbose_name_plural = 'Project'
