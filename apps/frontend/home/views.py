@@ -1,4 +1,6 @@
 from django.http import JsonResponse
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from django.views.decorators.http import require_POST
 from django.views.generic import ListView
 
@@ -9,7 +11,7 @@ from ...backend.resume.models import *
 
 
 # Create your views here.
-
+@method_decorator(cache_page(60 * 60 * 24 * 30), name='dispatch')
 class HomeView(ListView):
     model = Config
     template_name = "frontend/home/index.html"
@@ -23,6 +25,7 @@ class HomeView(ListView):
         return context
 
 
+@method_decorator(cache_page(60 * 60 * 24 * 30), name='dispatch')
 class ResumeView(ListView):
     model = Config
     template_name = "frontend/resume/index.html"
@@ -38,6 +41,7 @@ class ResumeView(ListView):
         return context
 
 
+@method_decorator(cache_page(60 * 60 * 24 * 30), name='dispatch')
 class WorksView(ListView):
     model = Config
     template_name = "frontend/works/index.html"
@@ -51,6 +55,7 @@ class WorksView(ListView):
         return context
 
 
+@method_decorator(cache_page(60 * 60 * 24 * 30), name='dispatch')
 class BlogView(ListView):
     model = Config
     template_name = "frontend/blogs/index.html"
@@ -63,6 +68,7 @@ class BlogView(ListView):
         return context
 
 
+@method_decorator(cache_page(60 * 60 * 24 * 30), name='dispatch')
 class ContactView(ListView):
     model = Config
     template_name = "frontend/contact/index.html"
