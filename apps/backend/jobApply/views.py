@@ -1,5 +1,3 @@
-from lib2to3.fixes.fix_input import context
-
 import pandas as pd
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
@@ -65,6 +63,7 @@ def job_upload(request):
         return redirect('jobApply:job_list')
 
     return render(request, 'backend/jobs/job_upload.html')
+
 
 def sms_upload(request):
     if request.method == "POST":
