@@ -1,6 +1,7 @@
-from decouple import config
-from pathlib import Path
 import os
+from pathlib import Path
+
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,6 +28,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     'ckeditor',
+    'django_dump_die',
 
     'apps.backend.contact',
     'apps.backend.home',
@@ -35,6 +37,7 @@ INSTALLED_APPS = [
     'apps.backend.resume',
     'apps.backend.user',
     'apps.backend.analyticData',
+    'apps.backend.jobApply',
 ]
 
 APPEND_SLASH = False
@@ -48,7 +51,9 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    'personalPortfoloi.middleware.LoginRequiredMiddleware'
+    'personalPortfoloi.middleware.LoginRequiredMiddleware',
+    'django_dump_die.middleware.DumpAndDieMiddleware',
+
 ]
 
 ROOT_URLCONF = config('ROOT_URL')

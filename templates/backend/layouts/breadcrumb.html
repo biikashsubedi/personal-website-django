@@ -28,6 +28,15 @@
             </div>
         </div>
     {% endif %}
+    {% if uploadExcel %}
+
+        <div class="d-flex">
+            <div class="justify-content-center">
+                <a class="btn btn-sm btn-primary" href="{{ routeSms }}"><i class="fa fa-comment"></i> Update SMS</a>
+                <a class="btn btn-sm btn-warning" href="{{ route }}"><i class="fa fa-file-excel-o"></i> Upload Excel File</a>
+            </div>
+        </div>
+    {% endif %}
     {% if not formPage %}
         <div class="d-flex">
             <div class="justify-content-center">

@@ -1,0 +1,409 @@
+{% extends 'backend/layouts/master.html' %}
+{% load static %}
+
+
+{% block breadcrumb %}
+    {% url 'jobApply:job_list' as the_url %}
+    {% url 'jobApply:job_upload' as route %}
+    {% url 'jobApply:sms_upload' as routeSms %}
+    {% include 'backend/layouts/breadcrumb.html' with title="Job Apply Lists" formPage=True uploadExcel=True showPage=True route=route  routeSms=routeSms %}
+{% endblock %}
+
+
+{% block content %}
+    <div class="content-display clearfix">
+        {% include 'backend/layouts/partials/search.html' %}
+        <div class="panel">
+            <div class="panel-box">
+                <div class="table-responsive mt-3">
+                    <div class="card custom-card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered" id="forDataTable">
+                                    <caption></caption>
+
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">S.N</th>
+                                        <th>Name</th>
+                                        <th>Phone</th>
+                                        <th>Address</th>
+                                        <th>Website</th>
+                                        <th>Status</th>
+                                        <th>Review</th>
+                                        <th>Rating</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for job in object_list %}
+                                        <tr>
+                                            <td>{{ forloop.counter }} </td>
+                                            <td class="break-word">{{ job.name }}</td>
+                                            <td>+1 {{ job.phone_number }}</td>
+                                            <td class="break-word">{{ job.full_address }}</td>
+                                            <td class="break-word">
+                                                <a href="{{ job.website }}" target="_blank" class="job-modal-link">
+                                                    {{ job.website }}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                 <span class="badge {% if job.status == 'not_applied' %} badge-warning {% elif job.status == 'got_response' %} badge-danger {% else %} badge-success {% endif %}">
+                                                {{ job.status }}
+                                                </span>
+                                            </td>
+                                            <td>{{ job.review_count }}</td>
+                                            <td>{{ job.rating }}</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-primary"
+                                                        onclick="openModal({{ job.id }})"><i class="fa fa-comment"></i>
+                                                    Send
+                                                </button>
+                                                {% if job.status == "not_applied" %}
+                                                    <form action="{% url 'jobApply:apply_job' job.id %}" method="post"
+                                                          style="display:inline;">
+                                                        {% csrf_token %}
+                                                        <button type="submit" class="btn btn-sm btn-info">Apply
+                                                        </button>
+                                                    </form>
+                                                {% else %}
+                                                    <button class="btn btn-sm btn-danger" disabled> Applied</button>
+                                                {% endif %}
+                                                {% if job.status == "applied" %}
+                                                    <form action="{% url 'jobApply:apply_job_response' job.id %}"
+                                                          method="post"
+                                                          style="display:inline;">
+                                                        {% csrf_token %}
+                                                        <button type="submit" class="btn btn-sm btn-success"><i
+                                                                class="fa fa-check-circle"></i>
+                                                        </button>
+                                                    </form>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% for job in object_list %}
+        <div id="modal-{{ job.id }}" class="job-modal-container">
+            <div class="job-modal-content">
+                <span onclick="closeModal({{ job.id }})" class="job-modal-close">&times;</span>
+
+                <h3 class="job-modal-title">{{ job.name }}</h3>
+
+                <table class="job-modal-table">
+                    <tr>
+                        <td class="job-modal-label">SMS <span style="cursor: pointer;" class="ml-5"
+                                                              onclick="copy('{{ job.sms }}')"><i
+                                class="fa fa-copy"></i></span></td>
+                        <td class="job-modal-value">{{ job.sms }}</td>
+                    </tr>
+                    <tr>
+                        <td class="job-modal-label">Phone <span style="margin-left:2.4rem !important; cursor: pointer;"
+                                                                onclick="copy('{{ job.phone_number }}')"><i
+                                class="fa fa-copy"></i></span></td>
+                        <td class="job-modal-value">{{ job.phone_number }}</td>
+                    </tr>
+                    <tr class="job-modal-row-alt">
+                        <td class="job-modal-label">Full Address</td>
+                        <td class="job-modal-value">{{ job.full_address }}</td>
+                    </tr>
+                    <tr>
+                        <td class="job-modal-label">Coordinates</td>
+                        <td class="job-modal-value">{{ job.latitude }}, {{ job.longitude }}</td>
+                    </tr>
+                    <tr class="job-modal-row-alt">
+                        <td class="job-modal-label">Review Count</td>
+                        <td class="job-modal-value">{{ job.review_count }}</td>
+                    </tr>
+                    <tr>
+                        <td class="job-modal-label">Rating</td>
+                        <td class="job-modal-value">{{ job.rating }}</td>
+                    </tr>
+                    <tr class="job-modal-row-alt">
+                        <td class="job-modal-label">Timezone</td>
+                        <td class="job-modal-value">{{ job.timezone }}</td>
+                    </tr>
+                    <tr>
+                        <td class="job-modal-label">Website</td>
+                        <td class="job-modal-value" style="word-break: break-all;">
+                            <a href="{{ job.website }}" target="_blank" class="job-modal-link">
+                                {{ job.website }}
+                            </a>
+                        </td>
+                    </tr>
+                    <tr class="job-modal-row-alt">
+                        <td class="job-modal-label">Place Link</td>
+                        <td class="job-modal-value">
+                            <a href="{{ job.place_link }}" target="_blank" class="job-modal-link"
+                               style="word-break: break-all;">
+                                {{ job.place_link }}
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="job-modal-label">Types</td>
+                        <td class="job-modal-value">{{ job.types }}</td>
+                    </tr>
+                    <tr class="job-modal-row-alt">
+                        <td class="job-modal-label">Price Level</td>
+                        <td class="job-modal-value">{{ job.price_level }}</td>
+                    </tr>
+                    <tr>
+                        <td class="job-modal-label">Verified</td>
+                        <td class="job-modal-value">{{ job.verified }}</td>
+                    </tr>
+                </table>
+
+                <div class="job-modal-description">
+                    <p class="job-modal-description-title">Description</p>
+                    <p class="job-modal-description-text">{{ job.description }}</p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+    <!-- Single style definition outside of the loop -->
+    <style>
+        .job-modal-container {
+            display: none; /* This ensures the modal is hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            backdrop-filter: blur(3px);
+            overflow-y: auto;
+        }
+
+        .job-modal-content {
+            background: #fff;
+            margin: 5% auto;
+            padding: 30px;
+            width: 90%;
+            max-width: 800px;
+            position: relative;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            animation: jobModalFadeIn 0.3s ease;
+        }
+
+        .job-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            cursor: pointer;
+            font-size: 24px;
+            color: #666;
+            transition: color 0.2s;
+        }
+
+        .job-modal-close:hover {
+            color: #000;
+        }
+
+        .job-modal-title {
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 22px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 12px;
+            text-align: center;
+        }
+
+        .job-modal-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .job-modal-label {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            width: 30%;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .job-modal-value {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            color: #333;
+        }
+
+        .job-modal-row-alt {
+            background-color: #f9f9f9;
+        }
+
+        .job-modal-link {
+            color: #3366cc;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .job-modal-link:hover {
+            color: #1a4dba;
+            text-decoration: underline;
+        }
+
+        .job-modal-description {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        .job-modal-description-title {
+            margin: 0 0 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .job-modal-description-text {
+            margin: 0;
+            font-size: 15px;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        @keyframes jobModalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .job-modal-table,
+            .job-modal-table tbody,
+            .job-modal-table tr,
+            .job-modal-table td {
+                display: block;
+            }
+
+            .job-modal-label {
+                width: auto;
+                border-bottom: none;
+                padding-bottom: 0;
+                margin-top: 10px;
+            }
+
+            .job-modal-value {
+                padding-top: 5px;
+            }
+        }
+    </style>
+    <style>
+        #forDataTable {
+            width: 100%;
+            table-layout: auto; /* allow table to auto size based on content */
+        }
+
+        /* Apply word break only to specific columns */
+        #forDataTable td.break-word,
+        #forDataTable th.break-word {
+            white-space: normal !important;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+    </style>
+{% endblock %}
+
+
+{% block newScripts %}
+    <script>
+        function copy(text) {
+            navigator.clipboard.writeText(text).then(function () {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 5000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Text Copied!',
+                })
+            }, function (err) {
+                console.error('Could not copy text: ', err);
+            });
+        }
+    </script>
+
+
+    <script>
+        $(document).ready(function () {
+            $('#forDataTable').DataTable({
+                "paging": false,
+                "ordering": true,
+                "info": false,
+                "searching": true,
+                "responsive": false,
+                "scrollX": false,
+                "autoWidth": true,
+                "language": {
+                    "search": "Search:",
+                    "zeroRecords": "No matching records found",
+                }
+            });
+        });
+    </script>
+    <script>
+        // Improved modal handling functions
+        function openModal(id) {
+            var modal = document.getElementById('modal-' + id);
+            if (modal) {
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden'; // Prevent scrolling on the background
+            }
+        }
+
+        function closeModal(id) {
+            var modal = document.getElementById('modal-' + id);
+            if (modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+        }
+
+        // Close modal when clicking outside the modal content
+        window.addEventListener('click', function (event) {
+            if (event.target.classList.contains('job-modal-container')) {
+                event.target.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Close modal with Escape key
+        window.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') {
+                var openModals = document.querySelectorAll('.job-modal-container[style*="display: block"]');
+                openModals.forEach(function (modal) {
+                    modal.style.display = 'none';
+                });
+                document.body.style.overflow = '';
+            }
+        });
+    </script>
+{% endblock %}

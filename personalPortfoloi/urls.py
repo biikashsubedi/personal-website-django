@@ -13,7 +13,8 @@ urlpatterns = [
     path('system/profiles/', include('apps.backend.profiles.urls')),
     path('system/', include('apps.backend.resume.urls')),
     path('system/contact-us/', include('apps.backend.contact.urls')),
-path('system/analytic/', include('apps.backend.analyticData.urls')),
+    path('system/analytic/', include('apps.backend.analyticData.urls')),
+    path('system/jobs/', include('apps.backend.jobApply.urls')),
 
     # frontend
     path('', include('apps.frontend.home.urls')),
