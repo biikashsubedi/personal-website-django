@@ -15,6 +15,7 @@ urlpatterns = [
     path('system/contact-us/', include('apps.backend.contact.urls')),
     path('system/analytic/', include('apps.backend.analyticData.urls')),
     path('system/jobs/', include('apps.backend.jobApply.urls')),
+    path('system/shift/', include('apps.backend.shift.urls')),
 
     # frontend
     path('', include('apps.frontend.home.urls')),

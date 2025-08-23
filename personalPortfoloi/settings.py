@@ -15,7 +15,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'bikashsubedi.com.np', 'www.bikashsubedi.com.np']
+ALLOWED_HOSTS = ['127.0.0.1', 'bikashsubedi.com.np', 'www.bikashsubedi.com.np', 'localhost']
 
 # Application definition
 
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'apps.backend.user',
     'apps.backend.analyticData',
     'apps.backend.jobApply',
+    'apps.backend.shift',
 ]
 
 APPEND_SLASH = False

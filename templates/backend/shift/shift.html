@@ -1,0 +1,585 @@
+{% extends 'backend/layouts/master.html' %}
+{% load static %}
+
+
+{% block styles %}
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f0f4f8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            transition: background 0.3s;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+            color: #333;
+        }
+
+        .card {
+            background: #fff;
+            width: 95%;
+            max-width: 400px;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="datetime-local"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background: #007bff;
+            color: #fff;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .history {
+            width: 95%;
+            max-width: 400px;
+            margin-top: 20px;
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .history-header button {
+            width: 40px;
+            padding: 5px;
+            font-size: 18px;
+            border-radius: 50%;
+        }
+
+        .history-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .history-list li {
+            background: #e0f7fa;
+            margin-bottom: 8px;
+            padding: 10px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .history-list li:hover {
+            background: #b2ebf2;
+        }
+
+        .pay {
+            font-weight: bold;
+            margin-top: 5px;
+            color: #007bff;
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 22px;
+            }
+
+            button {
+                font-size: 14px;
+            }
+        }
+    </style>
+
+    <style>
+        .modal {
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 400px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .close {
+            float: right;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        input[type="datetime-local"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        button#saveEditBtn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background: #007bff;
+            color: #fff;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button#saveEditBtn:hover {
+            background: #0056b3;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Bootstrap Select CSS -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
+
+    <!-- Bootstrap Select JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+
+    <h1>Check-In / Check-Out</h1>
+
+    <div class="card" id="checkin-card">
+        <div class="form-group">
+            <label for="checkin-time">Check-In Time</label>
+            <input type="datetime-local" id="checkin-time">
+        </div>
+        <button id="checkin-btn">Check In</button>
+    </div>
+
+    <div class="card" id="checkout-card" style="display:none;">
+        <div class="form-group">
+            <label for="checkout-time">Check-Out Time</label>
+            <input type="datetime-local" id="checkout-time">
+        </div>
+        <button id="checkout-btn">Check Out</button>
+    </div>
+
+    <div class="history">
+        <div class="history-header">
+            <button id="prev-day">&larr;</button>
+            <span id="history-date">Today</span>
+            <button id="next-day">&rarr;</button>
+        </div>
+        <ul class="history-list" id="history-list">
+            {% for record in object_list %}
+                <li data-id="{{ record.id }}">
+                    <div><strong>Check-In:</strong> <span
+                            class="checkin-time">{{ record.checkin_time|date:"Y-m-d\TH:i" }}</span></div>
+                    <div><strong>Check-Out:</strong> <span
+                            class="checkout-time">{{ record.checkout_time|date:"Y-m-d\TH:i" }}</span></div>
+                    <div class="pay">Pay: ${{ record.total_pay|floatformat:2 }}</div>
+                </li>
+            {% endfor %}
+        </ul>
+
+    </div>
+
+    <!-- Edit Attendance Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Attendance</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <label for="modalCheckin">Check-In Time:</label>
+                    <input type="datetime-local" id="modalCheckin" class="form-control mb-2">
+                    <label for="modalCheckout">Check-Out Time:</label>
+                    <input type="datetime-local" id="modalCheckout" class="form-control">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="saveEditBtn" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block newScripts %}
+
+
+    <script>
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 5000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        const checkinCard = document.getElementById('checkin-card');
+        const checkoutCard = document.getElementById('checkout-card');
+        const checkinBtn = document.getElementById('checkin-btn');
+        const checkoutBtn = document.getElementById('checkout-btn');
+        const checkinInput = document.getElementById('checkin-time');
+        const checkoutInput = document.getElementById('checkout-time');
+        const historyList = document.getElementById('history-list');
+
+        let currentDate = new Date(); // today
+        const prevBtn = document.getElementById('prev-day');
+        const nextBtn = document.getElementById('next-day');
+        const historyDateSpan = document.getElementById('history-date');
+
+        let currentAttendanceId = null;
+
+        function setCurrentDateTime(input) {
+            const now = new Date();
+            input.value = now.toISOString().slice(0, 16);
+        }
+
+        // --- On page load, check if there is already a pending check-in today ---
+        async function checkPendingAttendance() {
+            const res = await fetch("{% url 'shift:checkin' %}?today_only=1");
+            const data = await res.json();
+            if (data.pending) {
+                currentAttendanceId = data.pending.id;
+                checkinCard.style.display = 'none';
+                checkoutCard.style.display = 'block';
+                if (data.pending.checkout_time) {
+                    checkoutCard.style.display = 'none';
+                    checkinCard.style.display = 'none'; // already finished
+                } else {
+                    setCurrentDateTime(checkoutInput);
+                }
+            }
+        }
+
+        checkinBtn.addEventListener('click', async () => {
+            const payload = {checkin_time: checkinInput.value};
+
+            const res = await fetch("{% url 'shift:checkin' %}", {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json', 'X-CSRFToken': '{{ csrf_token }}'},
+                body: JSON.stringify(payload)
+            });
+
+            const data = await res.json();
+            if (data.id) {
+                currentAttendanceId = data.id;
+                checkinCard.style.display = 'none';
+                checkoutCard.style.display = 'block';
+                setCurrentDateTime(checkoutInput);
+
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Successfully Checkin.'
+                })
+            } else {
+                Toast.fire({
+                    icon: 'error',
+                    title: data.error || 'Error during check- in '
+                })
+            }
+
+            fetchHistory(currentDate);
+        });
+
+  function formatCanadaDatetime(datetimeStr) {
+      console.log(datetimeStr);
+    if (!datetimeStr) return null;
+
+    // Try parsing manually if "new Date" fails
+    let date = new Date(datetimeStr);
+    if (isNaN(date.getTime())) {
+        // Fallback if backend sends "YYYY-MM-DD HH:mm:ss"
+        date = new Date(datetimeStr.replace(" ", "T"));
+    }
+    if (isNaN(date.getTime())) return null;
+
+    return new Intl.DateTimeFormat("en-CA", {
+        timeZone: "America/Toronto",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true
+    }).format(date);
+}
+
+        checkoutBtn.addEventListener('click', async () => {
+            const payload = {checkout_time: checkoutInput.value};
+            const res = await fetch(`/system/shift/checkout/${currentAttendanceId}/`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json', 'X-CSRFToken': '{{ csrf_token }}'},
+                body: JSON.stringify(payload)
+            });
+            const data = await res.json();
+            if (data.id) {
+
+                checkoutCard.style.display = 'none';
+                checkinCard.style.display = 'none'; // finished for today
+
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Successfully Checkout.'
+                })
+
+                fetchHistory(currentDate);
+            } else {
+                Toast.fire({
+                    icon: 'error',
+                    title: data.error || 'Error during check- out'
+                })
+            }
+        });
+
+        setCurrentDateTime(checkinInput);
+        setCurrentDateTime(checkoutInput);
+        checkPendingAttendance();
+
+        // Edit check-in/out on click
+        document.querySelectorAll('.history-list li').forEach(li => {
+            li.addEventListener('click', async () => {
+                const id = li.dataset.id;
+                const currentCheckin = li.querySelector('.checkin-time').textContent;
+                const currentCheckout = li.querySelector('.checkout-time').textContent;
+
+                const newCheckin = prompt("Edit Check-In Time:", currentCheckin) || currentCheckin;
+                const newCheckout = prompt("Edit Check-Out Time:", currentCheckout) || currentCheckout;
+
+                const res = await fetch(`/system/shift/checkout/${id}/`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json', 'X-CSRFToken': '{{ csrf_token }}'},
+                    body: JSON.stringify({
+                        checkin_time: newCheckin,
+                        checkout_time: newCheckout
+                    })
+                });
+                const data = await res.json();
+                if (data.id) {
+                    li.querySelector('.checkin-time').textContent = newCheckin;
+                    li.querySelector('.checkout-time').textContent = newCheckout;
+                    li.querySelector('.pay').textContent = "Pay: $" + data.total_pay;
+                } else {
+                    alert(data.error || 'Error updating record');
+                }
+            });
+        });
+
+        async function fetchHistory(date) {
+            const res = await fetch(`/system/shift/history/?date=${date.toISOString().slice(0, 10)}`);
+            const data = await res.json();
+            const historyList = document.getElementById('history-list');
+            historyList.innerHTML = ''; // clear old records
+
+            if (data.records.length === 0) {
+                const p = document.createElement('p');
+                p.textContent = "This is a leave day";
+                p.style.textAlign = "center";
+                p.style.color = "#555";
+                historyList.appendChild(p);
+                return
+            }
+
+            if (data.records[0].checkout_time !== null) {
+                checkinCard.style.display = 'none';
+            }
+
+            data.records.forEach(record => {
+                const li = document.createElement('li');
+                li.dataset.id = record.id;
+               li.innerHTML = `
+    <div><strong>Check-In:</strong> ${formatCanadaDatetime(record.checkin_time) || "-"}</div>
+    <div><strong>Check-Out:</strong> ${formatCanadaDatetime(record.checkout_time) || "-"}</div>
+    <div class="pay">Pay: $${record.total_pay !== null && record.total_pay !== undefined ? record.total_pay.toFixed(2) : "0.00"}</div>
+`;
+                historyList.appendChild(li);
+
+                // Attach click event for modal
+                li.addEventListener('click', () => openEditModal(li, record));
+            });
+        }
+
+        function updateArrowStatus() {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const cur = new Date(currentDate);
+            cur.setHours(0, 0, 0, 0);
+
+            nextBtn.disabled = cur >= today;
+        }
+
+        function updateHistoryDateText() {
+            const today = new Date();
+            const yesterday = new Date();
+            yesterday.setDate(today.getDate() - 1);
+
+            if (currentDate.toDateString() === today.toDateString()) {
+                historyDateSpan.textContent = 'Today';
+            } else if (currentDate.toDateString() === yesterday.toDateString()) {
+                historyDateSpan.textContent = 'Yesterday';
+            } else {
+                const options = {weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric'};
+                historyDateSpan.textContent = currentDate.toLocaleDateString(undefined, options);
+            }
+        }
+
+        // Arrow button clicks
+        prevBtn.addEventListener('click', () => {
+            currentDate.setDate(currentDate.getDate() - 1);
+            updateHistoryDateText();
+            updateArrowStatus();
+            fetchHistory(currentDate);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentDate.setDate(currentDate.getDate() + 1);
+            updateHistoryDateText();
+            updateArrowStatus();
+            fetchHistory(currentDate);
+        });
+
+        // Initial load
+        updateHistoryDateText();
+        updateArrowStatus();
+        fetchHistory(currentDate);
+
+        let selectedLi = null;
+        const modalEl = document.getElementById('editModal');
+        const modal = new bootstrap.Modal(modalEl); // bootstrap 5 modal instance
+        const modalCheckin = document.getElementById('modalCheckin');
+        const modalCheckout = document.getElementById('modalCheckout');
+        const saveEditBtn = document.getElementById('saveEditBtn');
+
+        function openEditModal(li, record) {
+            selectedLi = li;
+            selectedRecord = record;
+
+            modalCheckin.value = record.checkin_time.slice(0, 16);
+            modalCheckout.value = record.checkout_time.slice(0, 16);
+
+            modal.show();
+        }
+
+        function attachLiClick() {
+            document.querySelectorAll('.history-list li').forEach(li => {
+                li.addEventListener('click', () => {
+                    selectedLi = li;
+                    const checkin = li.querySelector('.checkin-time').textContent;
+                    const checkout = li.querySelector('.checkout-time').textContent;
+
+                    modalCheckin.value = checkin.slice(0, 16);
+                    modalCheckout.value = checkout.slice(0, 16);
+
+                    modal.show(); // open bootstrap modal
+                });
+            });
+        }
+
+        saveEditBtn.addEventListener('click', async () => {
+            const newCheckin = modalCheckin.value;
+            const newCheckout = modalCheckout.value;
+            const recordId = selectedLi.dataset.id;
+
+            const resUpdate = await fetch(`/system/shift/checkout/${recordId}/`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json', 'X-CSRFToken': '{{ csrf_token }}'},
+                body: JSON.stringify({checkin_time: newCheckin, checkout_time: newCheckout})
+            });
+
+            const updated = await resUpdate.json();
+            if (updated.id) {
+                fetchHistory(currentDate);
+                modal.hide();
+            } else {
+                alert(updated.error || 'Error updating record');
+            }
+        });
+
+        // call after history list is loaded
+        attachLiClick();
+
+
+    </script>
+
+
+{% endblock %}
+
