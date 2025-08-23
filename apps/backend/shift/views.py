@@ -41,6 +41,8 @@ def checkin(request):
         else:
             checkin_time = timezone.now()
 
+        # dd(checkin_time)
+
         # Prevent multiple check-ins per day
         today = checkin_time.date()
         already = Attendance.objects.filter(checkin_time__date=today).exists()
@@ -73,6 +75,7 @@ def checkout(request, attendance_id):
         except Attendance.DoesNotExist:
             return JsonResponse({'error': 'Attendance not found'}, status=404)
 
+        checkin_time = data.get('checkin_time')
         checkout_time = data.get('checkout_time')
         if checkout_time:
             # Convert to timezone-aware datetime
@@ -80,13 +83,21 @@ def checkout(request, attendance_id):
         else:
             checkout_time = None
 
+
+        if checkin_time:
+            # Convert to timezone-aware datetime
+            checkin_time = timezone.make_aware(datetime.fromisoformat(checkin_time))
+        else:
+            checkin_time = attendance.checkin_time
+
+        attendance.checkin_time = checkin_time
         attendance.checkout_time = checkout_time
         attendance.status = 'checked_out'
         attendance.save()
 
         return JsonResponse({
             'id': attendance.id,
-            'checkin_time': attendance.checkin_time.isoformat(),
+            'checkin_time': checkin_time.isoformat(),
             'checkout_time': attendance.checkout_time.isoformat() if checkout_time else None,
             'hours_worked': attendance.hours_worked,
             'total_pay': attendance.total_pay,

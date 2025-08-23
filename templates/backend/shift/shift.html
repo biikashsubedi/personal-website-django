@@ -314,7 +314,28 @@
 
         function setCurrentDateTime(input) {
             const now = new Date();
-            input.value = now.toISOString().slice(0, 16);
+
+            // Convert to Canada/Toronto timezone parts
+            const options = {
+                timeZone: "America/Toronto",
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: false
+            };
+
+            const parts = new Intl.DateTimeFormat("en-CA", options).formatToParts(now);
+
+            const year = parts.find(p => p.type === "year").value;
+            const month = parts.find(p => p.type === "month").value;
+            const day = parts.find(p => p.type === "day").value;
+            const hour = parts.find(p => p.type === "hour").value.padStart(2, "0");
+            const minute = parts.find(p => p.type === "minute").value.padStart(2, "0");
+
+            // Format for datetime-local input (yyyy-MM-ddTHH:mm)
+            input.value = `${year}-${month}-${day}T${hour}:${minute}`;
         }
 
         // --- On page load, check if there is already a pending check-in today ---
@@ -364,25 +385,50 @@
             fetchHistory(currentDate);
         });
 
-  function formatCanadaDatetime(datetimeStr) {
-      console.log(datetimeStr);
-    if (!datetimeStr) return null;
+        function formatCanadaDatetime(datetimeStr) {
+            if (!datetimeStr) return null;
 
-    // Try parsing manually if "new Date" fails
-    let date = new Date(datetimeStr);
-    if (isNaN(date.getTime())) {
-        // Fallback if backend sends "YYYY-MM-DD HH:mm:ss"
-        date = new Date(datetimeStr.replace(" ", "T"));
-    }
-    if (isNaN(date.getTime())) return null;
+            // Try parsing manually if "new Date" fails
+            let date = new Date(datetimeStr);
+            if (isNaN(date.getTime())) {
+                // Fallback if backend sends "YYYY-MM-DD HH:mm:ss"
+                date = new Date(datetimeStr.replace(" ", "T"));
+            }
+            if (isNaN(date.getTime())) return null;
 
-    return new Intl.DateTimeFormat("en-CA", {
-        timeZone: "America/Toronto",
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: true
-    }).format(date);
-}
+            return new Intl.DateTimeFormat("en-CA", {
+                {#timeZone: "America/Toronto",#}
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: true
+            }).format(date);
+        }
+
+        function formatCanadaDatetimeInnerValue(datetimeString) {
+            if (!datetimeString) return "";
+
+            const date = new Date(datetimeString);
+
+            const options = {
+                timeZone: "America/Toronto",
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: false
+            };
+
+            const parts = new Intl.DateTimeFormat("en-CA", options).formatToParts(date);
+
+            const year = parts.find(p => p.type === "year").value;
+            const month = parts.find(p => p.type === "month").value;
+            const day = parts.find(p => p.type === "day").value;
+            const hour = parts.find(p => p.type === "hour").value.padStart(2, "0");
+            const minute = parts.find(p => p.type === "minute").value.padStart(2, "0");
+
+            return `${year}-${month}-${day}T${hour}:${minute}`;
+        }
 
         checkoutBtn.addEventListener('click', async () => {
             const payload = {checkout_time: checkoutInput.value};
@@ -466,7 +512,7 @@
             data.records.forEach(record => {
                 const li = document.createElement('li');
                 li.dataset.id = record.id;
-               li.innerHTML = `
+                li.innerHTML = `
     <div><strong>Check-In:</strong> ${formatCanadaDatetime(record.checkin_time) || "-"}</div>
     <div><strong>Check-Out:</strong> ${formatCanadaDatetime(record.checkout_time) || "-"}</div>
     <div class="pay">Pay: $${record.total_pay !== null && record.total_pay !== undefined ? record.total_pay.toFixed(2) : "0.00"}</div>
@@ -533,8 +579,9 @@
             selectedLi = li;
             selectedRecord = record;
 
-            modalCheckin.value = record.checkin_time.slice(0, 16);
-            modalCheckout.value = record.checkout_time.slice(0, 16);
+
+            modalCheckin.value = formatCanadaDatetimeInnerValue(record.checkin_time);
+            modalCheckout.value = formatCanadaDatetimeInnerValue(record.checkout_time);
 
             modal.show();
         }
@@ -545,6 +592,7 @@
                     selectedLi = li;
                     const checkin = li.querySelector('.checkin-time').textContent;
                     const checkout = li.querySelector('.checkout-time').textContent;
+
 
                     modalCheckin.value = checkin.slice(0, 16);
                     modalCheckout.value = checkout.slice(0, 16);
