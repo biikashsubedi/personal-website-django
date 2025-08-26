@@ -6,7 +6,7 @@ app_name = 'shift'
 urlpatterns = [
     path('', Index.as_view(), name='index'),
     path('checkin/', checkin, name='checkin'),
-    path('checkout/<int:attendance_id>/', checkout, name='checkout'),
+    path('checkout/<int:shift_id>/', checkout, name='checkout'),
     path('history/', history, name='history')
 
 ]

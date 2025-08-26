@@ -1,24 +1,23 @@
 {% extends 'backend/layouts/master.html' %}
 {% load static %}
 
-
 {% block styles %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
+
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
             background: #f0f4f8;
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            transition: background 0.3s;
         }
 
         h1 {
-            text-align: center;
-            margin: 20px 0;
+            margin: 100px 0 20px;
             color: #333;
         }
 
@@ -30,51 +29,18 @@
             margin: 10px 0;
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            animation: fadeIn 0.5s ease forwards;
+            animation: fadeIn 0.4s ease;
         }
 
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(10px);
+                transform: translateY(10px)
             }
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateY(0)
             }
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        input[type="datetime-local"] {
-            width: 100%;
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            background: #007bff;
-            color: #fff;
-            font-size: 16px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        button:hover {
-            background: #0056b3;
         }
 
         .history {
@@ -83,32 +49,12 @@
             margin-top: 20px;
         }
 
-        .history-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .history-header button {
-            width: 40px;
-            padding: 5px;
-            font-size: 18px;
-            border-radius: 50%;
-        }
-
-        .history-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
         .history-list li {
             background: #e0f7fa;
             margin-bottom: 8px;
             padding: 10px;
             border-radius: 8px;
-            transition: 0.3s;
+            cursor: pointer;
         }
 
         .history-list li:hover {
@@ -120,514 +66,946 @@
             margin-top: 5px;
             color: #007bff;
         }
-
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 22px;
-            }
-
-            button {
-                font-size: 14px;
-            }
-        }
+        
     </style>
+
 
     <style>
-        .modal {
-            position: fixed;
-            z-index: 999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+    /* UNIQUE WORK HISTORY CSS - MOBILE FIRST RESPONSIVE DESIGN */
+/* Optimized for mobile devices with touch-friendly interactions */
+/* Full width cards that match inner-body container */
 
-        .modal-content {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 400px;
-            animation: fadeIn 0.3s ease;
-        }
+/* Force full width for history list container */
+#history-list {
+    width: 100% !important;
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
 
-        .close {
-            float: right;
-            font-size: 24px;
-            cursor: pointer;
-        }
+/* Empty State Styling - Mobile Optimized - Full Width */
+.work-history-empty {
+    text-align: center;
+    padding: 2rem 1rem;
+    background: linear-gradient(135deg, #f8f9ff 0%, #e8f2ff 100%);
+    border-radius: 16px;
+    border: 2px dashed #c7d2fe;
+    margin: 1rem 0;
+    animation: workFadeInUp 0.6s ease-out;
+    width: 100%;
+    box-sizing: border-box;
+}
 
-        input[type="datetime-local"] {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-        }
+.work-empty-icon {
+    font-size: 3rem;
+    margin-bottom: 0.75rem;
+    display: block;
+}
 
-        button#saveEditBtn {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            background: #007bff;
-            color: #fff;
-            border-radius: 10px;
-            font-size: 16px;
-            cursor: pointer;
-        }
+.work-empty-title {
+    color: #4c51bf;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
 
-        button#saveEditBtn:hover {
-            background: #0056b3;
-        }
+.work-empty-subtitle {
+    color: #6b7280;
+    margin: 0;
+    font-size: 0.9rem;
+}
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+/* Enhanced History Items - Mobile First - Full Width */
+.work-shift-item {
+    margin-bottom: 1rem;
+    animation: workSlideInUp 0.5s ease-out both;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    list-style: none;
+    /* Touch-friendly tap target */
+    min-height: 44px;
+    display: block;
+    width: 100%;
+}
+
+.work-shift-item:active {
+    transform: scale(0.98);
+}
+
+.work-shift-card {
+    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+    border-radius: 16px;
+    padding: 1rem;
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.05),
+        0 2px 4px rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 100%;
+    /* Mobile touch optimization */
+    -webkit-tap-highlight-color: transparent;
+    /* Full width container */
+    display: block;
+    box-sizing: border-box;
+}
+
+.work-shift-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, #10b981 0%, #059669 100%);
+    transition: width 0.3s ease;
+}
+
+.work-shift-card.work-active::before {
+    background: linear-gradient(180deg, #f59e0b 0%, #d97706 100%);
+    animation: workPulse 2s infinite;
+}
+
+.work-shift-item:active .work-shift-card {
+    box-shadow: 
+        0 8px 20px rgba(0, 0, 0, 0.1),
+        0 4px 8px rgba(0, 0, 0, 0.06);
+    transform: translateY(-2px);
+}
+
+.work-shift-card:active::before {
+    width: 6px;
+}
+
+/* Header Section - Mobile Optimized */
+.work-shift-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.work-workspace-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex: 1;
+    min-width: 0; /* Allow text truncation */
+}
+
+.work-workspace-icon {
+    font-size: 1.25rem;
+    background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+    padding: 0.4rem;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.work-workspace-name {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #1f2937;
+    text-transform: capitalize;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.work-shift-status {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.work-status-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 16px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.work-status-badge.work-completed {
+    background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+    color: #065f46;
+    border: 1px solid #34d399;
+}
+
+.work-status-badge.work-active {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    color: #92400e;
+    border: 1px solid #f59e0b;
+    animation: workGlow 2s infinite alternate;
+}
+
+.work-status-icon {
+    font-size: 0.9rem;
+}
+
+/* Time Section - Mobile Stack Layout */
+.work-shift-details {
+    margin-bottom: 1rem;
+}
+
+.work-time-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid rgba(226, 232, 240, 0.6);
+}
+
+.work-time-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.work-time-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: #6b7280;
+    font-weight: 500;
+    flex-shrink: 0;
+}
+
+.work-time-icon {
+    font-size: 0.9rem;
+}
+
+.work-time-value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1f2937;
+    background: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    min-width: 80px;
+    text-align: center;
+}
+
+.work-time-item.work-pending .work-time-value {
+    color: #f59e0b;
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border-color: #f59e0b;
+}
+
+.work-time-divider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+}
+
+.work-divider-line {
+    width: 30px;
+    height: 1px;
+    background: linear-gradient(90deg, #c7d2fe 0%, #a5b4fc 50%, #c7d2fe 100%);
+}
+
+.work-duration-badge {
+    background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+    color: white;
+    padding: 0.25rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(79, 70, 229, 0.3);
+}
+
+/* Footer Section - Mobile Optimized */
+.work-shift-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(226, 232, 240, 0.6);
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.work-pay-info {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex: 1;
+    min-width: 0;
+}
+
+.work-pay-icon {
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.work-pay-label {
+    color: #6b7280;
+    font-weight: 500;
+    font-size: 0.8rem;
+    white-space: nowrap;
+}
+
+.work-pay-amount {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #059669;
+    background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+    padding: 0.3rem 0.6rem;
+    border-radius: 8px;
+    border: 1px solid #34d399;
+    margin-left: auto;
+}
+
+.work-edit-hint {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: #6b7280;
+    font-size: 0.7rem;
+    opacity: 0.8;
+    flex-shrink: 0;
+}
+
+.work-edit-icon {
+    font-size: 0.8rem;
+}
+
+/* Tablet and larger screens */
+@media (min-width: 768px) {
+    .work-history-empty {
+        padding: 3rem 2rem;
+    }
+    
+    .work-empty-icon {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+    }
+    
+    .work-empty-title {
+        font-size: 1.4rem;
+    }
+    
+    .work-empty-subtitle {
+        font-size: 1rem;
+    }
+    
+    .work-shift-item {
+        margin-bottom: 1.5rem;
+    }
+    
+    .work-shift-item:hover {
+        transform: translateY(-4px);
+    }
+    
+    .work-shift-card {
+        padding: 1.5rem;
+        border-radius: 20px;
+        box-shadow: 
+            0 10px 25px rgba(0, 0, 0, 0.08),
+            0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+    
+    .work-shift-card:hover {
+        box-shadow: 
+            0 20px 40px rgba(0, 0, 0, 0.12),
+            0 8px 16px rgba(0, 0, 0, 0.08);
+        border-color: #c7d2fe;
+    }
+    
+    .work-shift-card:hover::before {
+        width: 6px;
+    }
+    
+    .work-workspace-icon {
+        font-size: 1.5rem;
+        padding: 0.5rem;
+        border-radius: 12px;
+    }
+    
+    .work-workspace-name {
+        font-size: 1.1rem;
+    }
+    
+    .work-status-badge {
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.875rem;
+    }
+    
+    .work-time-row {
+        flex-direction: row;
+        align-items: center;
+        padding: 1.25rem;
+        border-radius: 16px;
+    }
+    
+    .work-time-item {
+        flex: 1;
+        text-align: center;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .work-time-label {
+        justify-content: center;
+        margin-bottom: 0.5rem;
+    }
+    
+    .work-time-value {
+        font-size: 1.1rem;
+        padding: 0.5rem 1rem;
+        border-radius: 12px;
+    }
+    
+    .work-time-divider {
+        flex-direction: column;
+        min-width: 80px;
+        padding: 0;
+    }
+    
+    .work-divider-line {
+        width: 40px;
+        height: 2px;
+    }
+    
+    .work-duration-badge {
+        padding: 0.375rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+    }
+    
+    .work-shift-footer {
+        flex-wrap: nowrap;
+    }
+    
+    .work-pay-info {
+        flex: none;
+    }
+    
+    .work-pay-label {
+        font-size: 0.9rem;
+    }
+    
+    .work-pay-amount {
+        font-size: 1.1rem;
+        padding: 0.375rem 0.75rem;
+        border-radius: 12px;
+        margin-left: 0.5rem;
+    }
+    
+    .work-edit-hint {
+        font-size: 0.75rem;
+        opacity: 0.7;
+    }
+    
+    .work-shift-card:hover .work-edit-hint {
+        opacity: 1;
+    }
+}
+
+/* Unique Animations - won't conflict */
+@keyframes workFadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes workSlideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes workPulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+@keyframes workGlow {
+    from {
+        box-shadow: 0 0 5px rgba(245, 158, 11, 0.5);
+    }
+    to {
+        box-shadow: 0 0 15px rgba(245, 158, 11, 0.8);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .work-time-row {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .work-time-divider {
+        transform: rotate(90deg);
+        min-width: auto;
+        height: 40px;
+    }
+    
+    .work-shift-footer {
+        flex-direction: column;
+        gap: 0.75rem;
+        align-items: flex-start;
+    }
+    
+    .work-shift-card {
+        padding: 1rem;
+    }
+}
     </style>
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Bootstrap Select CSS -->
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
-
-    <!-- Bootstrap Select JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
-
+    
+    
 {% endblock %}
 
-
-
 {% block content %}
-
-
     <h1>Check-In / Check-Out</h1>
 
     <div class="card" id="checkin-card">
-        <div class="form-group">
-            <label for="checkin-time">Check-In Time</label>
-            <input type="datetime-local" id="checkin-time">
+        <div class="mb-2">
+            <label for="workspace">Workspace</label>
+            <select id="workspace" class="form-control">
+                <option value="miniso">Miniso</option>
+                <option value="bhai">Bhai</option>
+            </select>
         </div>
-        <button id="checkin-btn">Check In</button>
+        <div class="mb-2">
+            <label for="checkin-time">Check-In Time</label>
+            <input type="datetime-local" id="checkin-time" class="form-control">
+        </div>
+        <button id="checkin-btn" class="btn btn-primary w-100">Check In</button>
     </div>
 
     <div class="card" id="checkout-card" style="display:none;">
-        <div class="form-group">
+        <div class="mb-2">
             <label for="checkout-time">Check-Out Time</label>
-            <input type="datetime-local" id="checkout-time">
+            <input type="datetime-local" id="checkout-time" class="form-control">
         </div>
-        <button id="checkout-btn">Check Out</button>
+        <button id="checkout-btn" class="btn btn-danger w-100">Check Out</button>
     </div>
 
     <div class="history">
-        <div class="history-header">
-            <button id="prev-day">&larr;</button>
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <button id="prev-day" class="btn btn-outline-primary btn-sm">&larr;</button>
             <span id="history-date">Today</span>
-            <button id="next-day">&rarr;</button>
+            <button id="next-day" class="btn btn-outline-primary btn-sm">&rarr;</button>
         </div>
-        <ul class="history-list" id="history-list">
-            {% for record in object_list %}
-                <li data-id="{{ record.id }}">
-                    <div><strong>Check-In:</strong> <span
-                            class="checkin-time">{{ record.checkin_time|date:"Y-m-d\TH:i" }}</span></div>
-                    <div><strong>Check-Out:</strong> <span
-                            class="checkout-time">{{ record.checkout_time|date:"Y-m-d\TH:i" }}</span></div>
-                    <div class="pay">Pay: ${{ record.total_pay|floatformat:2 }}</div>
-                </li>
-            {% endfor %}
-        </ul>
-
+        <ul class="history-list list-unstyled" id="history-list"></ul>
     </div>
 
-    <!-- Edit Attendance Modal -->
+    <!-- Edit Shift Modal -->
     <div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Edit Attendance</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title">Edit Shift</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <label for="modalCheckin">Check-In Time:</label>
+                    <label>Workspace:</label>
+                    <select id="modalWorkspace" class="form-control mb-2">
+                        <option value="miniso">Miniso</option>
+                        <option value="bhai">Bhai</option>
+                    </select>
+                    <label>Check-In:</label>
                     <input type="datetime-local" id="modalCheckin" class="form-control mb-2">
-                    <label for="modalCheckout">Check-Out Time:</label>
+                    <label>Check-Out:</label>
                     <input type="datetime-local" id="modalCheckout" class="form-control">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" id="saveEditBtn" class="btn btn-primary">Save</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="saveEditBtn" class="btn btn-primary">Save</button>
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
-
 {% endblock %}
 
-
 {% block newScripts %}
-
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+        /* -------------------- UTIL -------------------- */
+        const $ = sel => document.querySelector(sel);
+        const $$ = sel => document.querySelectorAll(sel);
 
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 5000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        })
+        const Toast = Swal.mixin({toast: true, position: 'top-end', timer: 3500, showConfirmButton: false});
 
-        const checkinCard = document.getElementById('checkin-card');
-        const checkoutCard = document.getElementById('checkout-card');
-        const checkinBtn = document.getElementById('checkin-btn');
-        const checkoutBtn = document.getElementById('checkout-btn');
-        const checkinInput = document.getElementById('checkin-time');
-        const checkoutInput = document.getElementById('checkout-time');
-        const historyList = document.getElementById('history-list');
+        const historyList = $('#history-list');
+        const checkinCard = $('#checkin-card');
+        const checkoutCard = $('#checkout-card');
+        const checkinBtn = $('#checkin-btn');
+        const checkoutBtn = $('#checkout-btn');
+        const checkinInput = $('#checkin-time');
+        const checkoutInput = $('#checkout-time');
+        const prevBtn = $('#prev-day');
+        const nextBtn = $('#next-day');
+        const historyDateEl = $('#history-date');
 
-        let currentDate = new Date(); // today
-        const prevBtn = document.getElementById('prev-day');
-        const nextBtn = document.getElementById('next-day');
-        const historyDateSpan = document.getElementById('history-date');
+        const modalEl = $('#editModal');
+        const modal = new bootstrap.Modal(modalEl);
+        const modalIn = $('#modalCheckin');
+        const modalOut = $('#modalCheckout');
+        const modalWs = $('#modalWorkspace');
+        const saveEditBtn = $('#saveEditBtn');
 
-        let currentAttendanceId = null;
+        let currentDate = new Date();
+        let currentShiftId = null;
+        let dayCache = {}; // { 'YYYY-MM-DD': [records] }
+        let selectedRecord = null;
 
-        function setCurrentDateTime(input) {
+        /* --------- Canada datetime-local helpers --------- */
+        function setCanadaNow(input) {
             const now = new Date();
+            const parts = new Intl.DateTimeFormat('en-CA', {
+                timeZone: 'America/Toronto', year: 'numeric', month: '2-digit', day: '2-digit',
+                hour: '2-digit', minute: '2-digit', hour12: false
+            }).formatToParts(now);
+            const g = t => parts.find(p => p.type === t).value;
+            input.value = `${g('year')}-${g('month')}-${g('day')}T${g('hour').padStart(2, '0')}:${g('minute').padStart(2, '0')}`;
+        }
 
-            // Convert to Canada/Toronto timezone parts
-            const options = {
-                timeZone: "America/Toronto",
-                year: "numeric",
-                month: "2-digit",
-                day: "2-digit",
-                hour: "2-digit",
-                minute: "2-digit",
-                hour12: false
+        /* time string 'HH:MM' -> 'h:mm AM/PM'  (safe for empty) */
+        function toAMPM(t) {
+            if (!t) return '-';
+            // handle 'YYYY-MM-DDTHH:MM' as well
+            const hhmm = t.length > 5 ? t.slice(11, 16) : t;
+            const [h, m] = hhmm.split(':').map(Number);
+            const ampm = h >= 12 ? 'PM' : 'AM';
+            const h12 = ((h + 11) % 12) + 1;
+            return `${h12}:${String(m).padStart(2, '0')} ${ampm}`;
+        }
+
+        /* 'YYYY-MM-DD' + 'HH:MM' -> 'YYYY-MM-DDTHH:MM' */
+        function combineDateTime(dateStr, timeStr) {
+            if (!dateStr || !timeStr) return '';
+            const hhmm = timeStr.length > 5 ? timeStr.slice(11, 16) : timeStr;
+            return `${dateStr}T${hhmm}`;
+        }
+
+        /* --------- History fetch/render + UI sync --------- */
+        function isoDay(d) {
+            return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+        }
+
+        async function fetchHistory(date, {force = false} = {}) {
+            const key = isoDay(date);
+            if (!force && dayCache[key]) {
+                renderHistory(key, dayCache[key]);
+                return;
+            }
+            const res = await fetch(`/system/shift/history/?date=${key}`);
+            const data = await res.json();
+            dayCache[key] = data.records || [];
+            renderHistory(key, dayCache[key]);
+        }
+
+       // Updated renderHistory function with unique class names
+// Updated renderHistory function with unique class names + Modal Support
+function renderHistory(key, records) {
+    historyList.innerHTML = '';
+    
+    if (!records.length) {
+        historyList.innerHTML = `
+            <div class="work-history-empty">
+                <div class="work-empty-icon">🏖️</div>
+                <h5 class="work-empty-title">No Work</h5>
+                <p class="work-empty-subtitle">This is a leave day - time to relax!</p>
+            </div>
+        `;
+    } else {
+        const frag = document.createDocumentFragment();
+        
+        records.forEach((r, index) => {
+            const li = document.createElement('li');
+            li.className = 'work-shift-item history-item'; // Keep original class for modal functionality
+            li.dataset.id = r.id;
+            li.dataset.date = r.date;
+            li.dataset.ws = r.workspace || '';
+            li.dataset.in = r.checkin_time || '';
+            li.dataset.out = r.checkout_time || '';
+            
+            // Determine status and styling
+            const isActive = !r.checkout_time;
+            const statusClass = isActive ? 'work-active' : 'work-completed';
+            const statusText = isActive ? 'Active' : 'Completed';
+            const statusIcon = isActive ? '🟢' : '✅';
+            
+            // Calculate work duration
+            let durationText = '-';
+            if (r.checkin_time && r.checkout_time) {
+                const checkin = new Date(`${r.date}T${r.checkin_time}`);
+                const checkout = new Date(`${r.date}T${r.checkout_time}`);
+                const diffMs = checkout - checkin;
+                const hours = Math.floor(diffMs / (1000 * 60 * 60));
+                const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+                durationText = `${hours}h ${minutes}m`;
+            }
+            
+            // Workspace icon mapping
+            const workspaceIcons = {
+                'miniso': '🛍️',
+                'bhai': '👨‍💼',
+                'default': '🏢'
             };
-
-            const parts = new Intl.DateTimeFormat("en-CA", options).formatToParts(now);
-
-            const year = parts.find(p => p.type === "year").value;
-            const month = parts.find(p => p.type === "month").value;
-            const day = parts.find(p => p.type === "day").value;
-            const hour = parts.find(p => p.type === "hour").value.padStart(2, "0");
-            const minute = parts.find(p => p.type === "minute").value.padStart(2, "0");
-
-            // Format for datetime-local input (yyyy-MM-ddTHH:mm)
-            input.value = `${year}-${month}-${day}T${hour}:${minute}`;
-        }
-
-        // --- On page load, check if there is already a pending check-in today ---
-        async function checkPendingAttendance() {
-            const res = await fetch("{% url 'shift:checkin' %}?today_only=1");
-            const data = await res.json();
-            if (data.pending) {
-                currentAttendanceId = data.pending.id;
-                checkinCard.style.display = 'none';
-                checkoutCard.style.display = 'block';
-                if (data.pending.checkout_time) {
-                    checkoutCard.style.display = 'none';
-                    checkinCard.style.display = 'none'; // already finished
-                } else {
-                    setCurrentDateTime(checkoutInput);
-                }
-            }
-        }
-
-        checkinBtn.addEventListener('click', async () => {
-            const payload = {checkin_time: checkinInput.value};
-
-            const res = await fetch("{% url 'shift:checkin' %}", {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json', 'X-CSRFToken': '{{ csrf_token }}'},
-                body: JSON.stringify(payload)
-            });
-
-            const data = await res.json();
-            if (data.id) {
-                currentAttendanceId = data.id;
-                checkinCard.style.display = 'none';
-                checkoutCard.style.display = 'block';
-                setCurrentDateTime(checkoutInput);
-
-                Toast.fire({
-                    icon: 'success',
-                    title: 'Successfully Checkin.'
-                })
-            } else {
-                Toast.fire({
-                    icon: 'error',
-                    title: data.error || 'Error during check- in '
-                })
-            }
-
-            fetchHistory(currentDate);
+            const workspaceIcon = workspaceIcons[r.workspace?.toLowerCase()] || workspaceIcons.default;
+            
+            li.innerHTML = `
+                <div class="work-shift-card ${statusClass}">
+                    <div class="work-shift-header">
+                        <div class="work-workspace-info">
+                            <span class="work-workspace-icon">${workspaceIcon}</span>
+                            <span class="work-workspace-name">${r.workspace || 'Unknown'}</span>
+                        </div>
+                        <div class="work-shift-status">
+                            <span class="work-status-badge ${statusClass}">
+                                <span class="work-status-icon">${statusIcon}</span>
+                                <span class="work-status-text">${statusText}</span>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="work-shift-details">
+                        <div class="work-time-row">
+                            <div class="work-time-item work-checkin">
+                                <div class="work-time-label">
+                                    <span class="work-time-icon">🕐</span>
+                                    Check-In
+                                </div>
+                                <div class="work-time-value v-in">${toAMPM(r.checkin_time)}</div>
+                            </div>
+                            <div class="work-time-divider">
+                                <div class="work-divider-line"></div>
+                                <span class="work-duration-badge">${durationText}</span>
+                            </div>
+                            <div class="work-time-item work-checkout ${!r.checkout_time ? 'work-pending' : ''}">
+                                <div class="work-time-label">
+                                    <span class="work-time-icon">🕐</span>
+                                    Check-Out
+                                </div>
+                                <div class="work-time-value v-out">${toAMPM(r.checkout_time) || 'Pending'}</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="work-shift-footer">
+                        <div class="work-pay-info">
+                            <span class="work-pay-icon">💰</span>
+                            <span class="work-pay-label">Total Pay:</span>
+                            <span class="work-pay-amount">$${(r.total_pay ?? 0).toFixed(2)}</span>
+                        </div>
+                        <div class="work-edit-hint">
+                            <span class="work-edit-icon">✏️</span>
+                            <span class="work-edit-text">Tap to edit</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Add staggered animation delay
+            li.style.animationDelay = `${index * 0.1}s`;
+            frag.appendChild(li);
         });
+        
+        historyList.appendChild(frag);
+    }
+    
+    syncCardsForDay(key, records);
+}
 
-        function formatCanadaDatetime(datetimeStr) {
-            if (!datetimeStr) return null;
 
-            // Try parsing manually if "new Date" fails
-            let date = new Date(datetimeStr);
-            if (isNaN(date.getTime())) {
-                // Fallback if backend sends "YYYY-MM-DD HH:mm:ss"
-                date = new Date(datetimeStr.replace(" ", "T"));
-            }
-            if (isNaN(date.getTime())) return null;
 
-            return new Intl.DateTimeFormat("en-CA", {
-                {#timeZone: "America/Toronto",#}
-                hour: "2-digit",
-                minute: "2-digit",
-                hour12: true
-            }).format(date);
-        }
 
-        function formatCanadaDatetimeInnerValue(datetimeString) {
-            if (!datetimeString) return "";
 
-            const date = new Date(datetimeString);
 
-            const options = {
-                timeZone: "America/Toronto",
-                year: "numeric",
-                month: "2-digit",
-                day: "2-digit",
-                hour: "2-digit",
-                minute: "2-digit",
-                hour12: false
-            };
+        function syncCardsForDay(key, records) {
+            const isToday = key === isoDay(new Date());
+            // default state
+            checkinCard.style.display = 'block';
+            checkoutCard.style.display = 'none';
 
-            const parts = new Intl.DateTimeFormat("en-CA", options).formatToParts(date);
-
-            const year = parts.find(p => p.type === "year").value;
-            const month = parts.find(p => p.type === "month").value;
-            const day = parts.find(p => p.type === "day").value;
-            const hour = parts.find(p => p.type === "hour").value.padStart(2, "0");
-            const minute = parts.find(p => p.type === "minute").value.padStart(2, "0");
-
-            return `${year}-${month}-${day}T${hour}:${minute}`;
-        }
-
-        checkoutBtn.addEventListener('click', async () => {
-            const payload = {checkout_time: checkoutInput.value};
-            const res = await fetch(`/system/shift/checkout/${currentAttendanceId}/`, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json', 'X-CSRFToken': '{{ csrf_token }}'},
-                body: JSON.stringify(payload)
-            });
-            const data = await res.json();
-            if (data.id) {
-
+            if (!isToday) {
+                // past/future days: hide action cards
+                checkinCard.style.display = 'none';
                 checkoutCard.style.display = 'none';
-                checkinCard.style.display = 'none'; // finished for today
-
-                Toast.fire({
-                    icon: 'success',
-                    title: 'Successfully Checkout.'
-                })
-
-                fetchHistory(currentDate);
-            } else {
-                Toast.fire({
-                    icon: 'error',
-                    title: data.error || 'Error during check- out'
-                })
-            }
-        });
-
-        setCurrentDateTime(checkinInput);
-        setCurrentDateTime(checkoutInput);
-        checkPendingAttendance();
-
-        // Edit check-in/out on click
-        document.querySelectorAll('.history-list li').forEach(li => {
-            li.addEventListener('click', async () => {
-                const id = li.dataset.id;
-                const currentCheckin = li.querySelector('.checkin-time').textContent;
-                const currentCheckout = li.querySelector('.checkout-time').textContent;
-
-                const newCheckin = prompt("Edit Check-In Time:", currentCheckin) || currentCheckin;
-                const newCheckout = prompt("Edit Check-Out Time:", currentCheckout) || currentCheckout;
-
-                const res = await fetch(`/system/shift/checkout/${id}/`, {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json', 'X-CSRFToken': '{{ csrf_token }}'},
-                    body: JSON.stringify({
-                        checkin_time: newCheckin,
-                        checkout_time: newCheckout
-                    })
-                });
-                const data = await res.json();
-                if (data.id) {
-                    li.querySelector('.checkin-time').textContent = newCheckin;
-                    li.querySelector('.checkout-time').textContent = newCheckout;
-                    li.querySelector('.pay').textContent = "Pay: $" + data.total_pay;
-                } else {
-                    alert(data.error || 'Error updating record');
-                }
-            });
-        });
-
-        async function fetchHistory(date) {
-            const res = await fetch(`/system/shift/history/?date=${date.toISOString().slice(0, 10)}`);
-            const data = await res.json();
-            const historyList = document.getElementById('history-list');
-            historyList.innerHTML = ''; // clear old records
-
-            if (data.records.length === 0) {
-                const p = document.createElement('p');
-                p.textContent = "This is a leave day";
-                p.style.textAlign = "center";
-                p.style.color = "#555";
-                historyList.appendChild(p);
-                return
+                return;
             }
 
-            if (data.records[0].checkout_time !== null) {
+            if (!records.length) {
+                // no records today -> allow check-in
+                setCanadaNow(checkinInput);
+                currentShiftId = null;
+                return;
+            }
+
+            // If there is a record without checkout -> show checkout
+            const pending = records.find(r => !r.checkout_time);
+            if (pending) {
+                currentShiftId = pending.id;
                 checkinCard.style.display = 'none';
+                checkoutCard.style.display = 'block';
+                // prefill checkout now
+                setCanadaNow(checkoutInput);
+            } else {
+                // all done today -> hide both
+                checkinCard.style.display = 'none';
+                checkoutCard.style.display = 'none';
             }
-
-            data.records.forEach(record => {
-                const li = document.createElement('li');
-                li.dataset.id = record.id;
-                li.innerHTML = `
-    <div><strong>Check-In:</strong> ${formatCanadaDatetime(record.checkin_time) || "-"}</div>
-    <div><strong>Check-Out:</strong> ${formatCanadaDatetime(record.checkout_time) || "-"}</div>
-    <div class="pay">Pay: $${record.total_pay !== null && record.total_pay !== undefined ? record.total_pay.toFixed(2) : "0.00"}</div>
-`;
-                historyList.appendChild(li);
-
-                // Attach click event for modal
-                li.addEventListener('click', () => openEditModal(li, record));
-            });
         }
 
-        function updateArrowStatus() {
+        /* --------- Header date + arrows --------- */
+        function updateHeader() {
             const today = new Date();
             today.setHours(0, 0, 0, 0);
-            const cur = new Date(currentDate);
-            cur.setHours(0, 0, 0, 0);
+            const yest = new Date(today);
+            yest.setDate(yest.getDate() - 1);
+            const cur0 = new Date(currentDate);
+            cur0.setHours(0, 0, 0, 0);
 
-            nextBtn.disabled = cur >= today;
-        }
-
-        function updateHistoryDateText() {
-            const today = new Date();
-            const yesterday = new Date();
-            yesterday.setDate(today.getDate() - 1);
-
-            if (currentDate.toDateString() === today.toDateString()) {
-                historyDateSpan.textContent = 'Today';
-            } else if (currentDate.toDateString() === yesterday.toDateString()) {
-                historyDateSpan.textContent = 'Yesterday';
+            if (cur0.getTime() === today.getTime()) {
+                historyDateEl.textContent = 'Today';
+            } else if (cur0.getTime() === yest.getTime()) {
+                historyDateEl.textContent = 'Yesterday';
             } else {
-                const options = {weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric'};
-                historyDateSpan.textContent = currentDate.toLocaleDateString(undefined, options);
+                const opts = {weekday: 'long', year: 'numeric', month: '2-digit', day: '2-digit'};
+                historyDateEl.textContent = currentDate.toLocaleDateString(undefined, opts);
             }
+
+            // disable next on today
+            nextBtn.disabled = cur0.getTime() >= today.getTime();
         }
 
-        // Arrow button clicks
         prevBtn.addEventListener('click', () => {
             currentDate.setDate(currentDate.getDate() - 1);
-            updateHistoryDateText();
-            updateArrowStatus();
+            updateHeader();
             fetchHistory(currentDate);
         });
 
         nextBtn.addEventListener('click', () => {
+            if (nextBtn.disabled) return;
             currentDate.setDate(currentDate.getDate() + 1);
-            updateHistoryDateText();
-            updateArrowStatus();
+            updateHeader();
             fetchHistory(currentDate);
         });
 
-        // Initial load
-        updateHistoryDateText();
-        updateArrowStatus();
-        fetchHistory(currentDate);
-
-        let selectedLi = null;
-        const modalEl = document.getElementById('editModal');
-        const modal = new bootstrap.Modal(modalEl); // bootstrap 5 modal instance
-        const modalCheckin = document.getElementById('modalCheckin');
-        const modalCheckout = document.getElementById('modalCheckout');
-        const saveEditBtn = document.getElementById('saveEditBtn');
-
-        function openEditModal(li, record) {
-            selectedLi = li;
-            selectedRecord = record;
-
-
-            modalCheckin.value = formatCanadaDatetimeInnerValue(record.checkin_time);
-            modalCheckout.value = formatCanadaDatetimeInnerValue(record.checkout_time);
-
-            modal.show();
-        }
-
-        function attachLiClick() {
-            document.querySelectorAll('.history-list li').forEach(li => {
-                li.addEventListener('click', () => {
-                    selectedLi = li;
-                    const checkin = li.querySelector('.checkin-time').textContent;
-                    const checkout = li.querySelector('.checkout-time').textContent;
-
-
-                    modalCheckin.value = checkin.slice(0, 16);
-                    modalCheckout.value = checkout.slice(0, 16);
-
-                    modal.show(); // open bootstrap modal
-                });
+        /* --------- Actions: check-in / check-out --------- */
+        checkinBtn.addEventListener('click', async () => {
+            const payload = {
+                checkin_time: checkinInput.value,
+                workspace: ($('#workspace')?.value) || undefined
+            };
+            const res = await fetch("{% url 'shift:checkin' %}", {
+                method: 'POST', headers: {'Content-Type': 'application/json', 'X-CSRFToken': '{{ csrf_token }}'},
+                body: JSON.stringify(payload)
             });
-        }
-
-        saveEditBtn.addEventListener('click', async () => {
-            const newCheckin = modalCheckin.value;
-            const newCheckout = modalCheckout.value;
-            const recordId = selectedLi.dataset.id;
-
-            const resUpdate = await fetch(`/system/shift/checkout/${recordId}/`, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json', 'X-CSRFToken': '{{ csrf_token }}'},
-                body: JSON.stringify({checkin_time: newCheckin, checkout_time: newCheckout})
-            });
-
-            const updated = await resUpdate.json();
-            if (updated.id) {
-                fetchHistory(currentDate);
-                modal.hide();
+            const data = await res.json();
+            if (data.id) {
+                Toast.fire({icon: 'success', title: 'Checked in'});
+                currentShiftId = data.id;
+                // refresh today list and UI
+                dayCache[isoDay(new Date())] = undefined;
+                fetchHistory(new Date(), {force: true});
             } else {
-                alert(updated.error || 'Error updating record');
+                Toast.fire({icon: 'error', title: data.error || 'Check-in failed'});
             }
         });
 
-        // call after history list is loaded
-        attachLiClick();
+        checkoutBtn.addEventListener('click', async () => {
+            if (!currentShiftId) {
+                Toast.fire({icon: 'error', title: 'No pending shift'});
+                return;
+            }
+            const payload = {checkout_time: checkoutInput.value};
+            const res = await fetch(`/system/shift/checkout/${currentShiftId}/`, {
+                method: 'POST', headers: {'Content-Type': 'application/json', 'X-CSRFToken': '{{ csrf_token }}'},
+                body: JSON.stringify(payload)
+            });
+            const data = await res.json();
+            if (data.id) {
+                Toast.fire({icon: 'success', title: 'Checked out'});
+                dayCache[isoDay(new Date())] = undefined;
+                fetchHistory(new Date(), {force: true});
+            } else {
+                Toast.fire({icon: 'error', title: data.error || 'Checkout failed'});
+            }
+        });
 
+        /* --------- Modal: open + save --------- */
+        // event delegation for fast click open
+        historyList.addEventListener('click', (e) => {
+            const li = e.target.closest('.history-item');
+            if (!li) return;
+            selectedRecord = {
+                id: li.dataset.id,
+                date: li.dataset.date,
+                workspace: li.dataset.ws || '',
+                checkin_time: li.dataset.in || '',
+                checkout_time: li.dataset.out || ''
+            };
+            modalWs.value = selectedRecord.workspace || 'miniso';
+            // fill as datetime-local values
+            modalIn.value = combineDateTime(selectedRecord.date, selectedRecord.checkin_time);
+            modalOut.value = combineDateTime(selectedRecord.date, selectedRecord.checkout_time);
+            modal.show();
+        });
 
+        saveEditBtn.addEventListener('click', async () => {
+            if (!selectedRecord) return;
+            const res = await fetch(`/system/shift/checkout/${selectedRecord.id}/`, {
+                method: 'POST', headers: {'Content-Type': 'application/json', 'X-CSRFToken': '{{ csrf_token }}'},
+                body: JSON.stringify({
+                    checkin_time: modalIn.value,
+                    checkout_time: modalOut.value,
+                    workspace: modalWs.value
+                })
+            });
+            const data = await res.json();
+            if (data.id) {
+                modal.hide();
+                Toast.fire({icon: 'success', title: 'Shift updated'});
+                dayCache[selectedRecord.date] = undefined;
+                fetchHistory(new Date(selectedRecord.date), {force: true});
+            } else {
+                Toast.fire({icon: 'error', title: data.error || 'Update failed'});
+            }
+        });
+
+        /* --------- INIT --------- */
+        setCanadaNow(checkinInput);
+        setCanadaNow(checkoutInput);
+        updateHeader();
+        fetchHistory(currentDate, {force: true});
     </script>
-
-
 {% endblock %}
 
