@@ -111,7 +111,7 @@ from django.views.decorators.clickjacking import xframe_options_exempt
 
 
 def preview_page(request):
-    return render(request, 'frontend/file/index.html')
+    return render(request, 'frontend/file/index1.html')
 
 
 import os
