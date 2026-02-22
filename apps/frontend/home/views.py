@@ -14,7 +14,7 @@ from ...backend.resume.models import *
 
 
 # Create your views here.
-# @method_decorator(cache_page(60 * 60 * 24 * 30), name='dispatch')
+@method_decorator(cache_page(60 * 60 * 24 * 30), name='dispatch')
 class HomeView(ListView):
     model = Config
     template_name = "frontend/home/index.html"
@@ -111,7 +111,7 @@ from django.views.decorators.clickjacking import xframe_options_exempt
 
 
 def preview_page(request):
-    return render(request, 'frontend/file/index1.html')
+    return render(request, 'frontend/file/index2.html')
 
 
 import os
