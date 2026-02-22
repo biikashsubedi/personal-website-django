@@ -1,4 +1,7 @@
-from django.http import JsonResponse
+import os
+
+from django.http import JsonResponse, HttpResponse
+from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.views.decorators.http import require_POST
@@ -11,7 +14,7 @@ from ...backend.resume.models import *
 
 
 # Create your views here.
-@method_decorator(cache_page(60 * 60 * 24 * 30), name='dispatch')
+# @method_decorator(cache_page(60 * 60 * 24 * 30), name='dispatch')
 class HomeView(ListView):
     model = Config
     template_name = "frontend/home/index.html"
@@ -97,3 +100,76 @@ def store_contact_us(request):
         return JsonResponse({'status': True, 'message': 'Thanks for contacting us. We will reach you soon!'})
     except Exception as e:
         return JsonResponse({'status': False}, status=400)
+
+
+import os
+import email
+from django.conf import settings
+from django.http import HttpResponse
+from django.shortcuts import render
+from django.views.decorators.clickjacking import xframe_options_exempt
+
+
+def preview_page(request):
+    return render(request, 'frontend/file/index.html')
+
+
+import os
+import email
+import base64
+from django.conf import settings
+from django.http import HttpResponse
+from django.views.decorators.clickjacking import xframe_options_exempt
+
+#
+# @xframe_options_exempt
+# def preview_mhtml(request):
+#     file_path = os.path.join(settings.MEDIA_ROOT, 'file', 'Discussion 1.mhtml')
+#
+#     with open(file_path, 'rb') as f:
+#         msg = email.message_from_binary_file(f)
+#
+#     html_parts = []
+#     cid_map = {}
+#
+#     for part in msg.walk():
+#         content_type = part.get_content_type()
+#         content_id = part.get("Content-ID")
+#
+#         if content_type == "text/html":
+#             html_parts.append(part.get_payload(decode=True).decode(errors="ignore"))
+#
+#         elif content_id:
+#             cid = content_id.strip("<>")
+#             data = part.get_payload(decode=True)
+#             encoded = base64.b64encode(data).decode()
+#             cid_map[cid] = f"data:{content_type};base64,{encoded}"
+#
+#     if not html_parts:
+#         return HttpResponse("No HTML found.")
+#
+#     # 🔥 IMPORTANT: choose the LARGEST html part (real page)
+#     html_content = max(html_parts, key=len)
+#
+#     # Replace CID images
+#     for cid, data_url in cid_map.items():
+#         html_content = html_content.replace(f"cid:{cid}", data_url)
+#
+#     return HttpResponse(html_content, content_type="text/html")
+
+
+import os
+from django.conf import settings
+from django.http import FileResponse
+
+
+from django.http import FileResponse
+import os
+from django.conf import settings
+
+def preview_mhtml(request):
+    file_path = os.path.join(settings.MEDIA_ROOT, 'file', 'Discussion 1.mhtml')
+    return FileResponse(
+        open(file_path, 'rb'),
+        content_type='multipart/related'
+    )

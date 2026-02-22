@@ -1,0 +1,69 @@
+{% extends 'backend/layouts/master.html' %}
+{% load static %}
+
+
+{% block breadcrumb %}
+    {% url 'shift:index' as the_url %}
+    {% include 'backend/layouts/breadcrumb.html' with title="Shifts" formPage=False showPage=True route=the_url %}
+{% endblock %}
+
+
+{% block content %}
+    <div class="content-display clearfix">
+        {% include 'backend/layouts/partials/search.html' %}
+        <div class="panel">
+            <div class="panel-box">
+                <div class="table-responsive mt-3">
+                    <div class="card custom-card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">S.N</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Place</th>
+                                        <th scope="col">Checkin Time</th>
+                                        <th scope="col">Checkout Time</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for shift in object_list %}
+                                        <tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{ shift.name|title }}</td>
+                                            <td><span class="badge bg-warning">{{ shift.workspace|title }}</span></td>
+                                            <td>{{ shift.checkin_time }}</td>
+                                            <td>{{ shift.checkout_time }}</td>
+                                            <td>
+                                            <span class="badge {% if shift.status %} bg-success {% else %} bg-danger {% endif %}">
+                                                {{ shift.status|yesno:"Completed,Pending" }}
+                                            </span>
+                                            </td>
+                                            <td>
+                                                <a href="{% url 'shift:update' shift.id %}"
+                                                   class="btn btn-primary btn-sm">Update</a>
+                                                <a href="{% url 'shift:delete' shift.id %}"
+                                                   class="btn btn-danger btn-sm">Delete</a>
+                                            </td>
+                                        </tr>
+
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- panel -->
+    </div>
+
+
+{% endblock %}
+
+
+

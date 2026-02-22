@@ -2,6 +2,9 @@
 
 
 {% block content %}
+        <a href="{% url 'frontend:serve_mhtml_binary' %}" target="_blank">
+    Open Preview
+</a>
 
     <div class="col-xxl-8 col-xl-9">
         <div class="bostami-page-content-wrap">
@@ -13,6 +16,10 @@
                     {{ profile.introduction|safe }}
                 </div>
             </div>
+
+
+
+
 
             {% if skills.count %}
                 <div class="section-wrapper pl-60 pr-60">

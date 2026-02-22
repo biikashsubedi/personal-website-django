@@ -1,0 +1,444 @@
+{% extends 'backend/layouts/master.html' %}
+{% load static %}
+
+{% block styles %}
+    <style>
+        body {
+            background: #f5f7fa;
+            padding: 40px 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+        }
+
+        .paystub-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+            overflow: hidden;
+        }
+
+        .paystub-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 40px;
+        }
+
+        .employee-name {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .header-stats {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .header-amount {
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .header-amount .amount-large {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .cheque-badge {
+            background: rgba(255, 255, 255, 0.25);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .paystub-body {
+            padding: 40px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .pay-table {
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .pay-table tr {
+            border-bottom: 1px solid #f7fafc;
+        }
+
+        .pay-table tr:last-child {
+            border-bottom: none;
+        }
+
+        .pay-table td {
+            padding: 14px 0;
+            font-size: 15px;
+        }
+
+        .pay-table .item-name {
+            color: #4a5568;
+            font-weight: 500;
+        }
+
+        .pay-table .item-rate {
+            color: #718096;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .pay-table .item-amount {
+            text-align: right;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .pay-table .ytd-amount {
+            text-align: right;
+            color: #718096;
+            font-size: 14px;
+            padding-left: 20px;
+        }
+
+        .negative-amount {
+            color: #e53e3e !important;
+        }
+
+        .section-total {
+            background: #f7fafc;
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .section-total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-total-label {
+            font-size: 15px;
+            font-weight: 600;
+            color: #4a5568;
+        }
+
+        .section-total-amount {
+            font-size: 18px;
+            font-weight: 700;
+            color: #2d3748;
+        }
+
+        .net-income-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 24px 30px;
+            border-radius: 12px;
+            margin-top: 30px;
+        }
+
+        .net-income-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .net-income-label {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .net-income-amount {
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .net-income-ytd {
+            text-align: right;
+            margin-top: 8px;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .info-note {
+            background: #edf2f7;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 13px;
+            color: #4a5568;
+        }
+
+        @media (max-width: 768px) {
+            .header-stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .header-amount {
+                margin-left: 0;
+                text-align: left;
+                margin-top: 10px;
+            }
+
+            .paystub-body {
+                padding: 24px;
+            }
+
+            .pay-table .item-rate {
+                display: none;
+            }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+{% endblock %}
+
+
+{% block breadcrumb %}
+    {% url 'shift:slip.index' as the_url %}
+    {% include 'backend/layouts/breadcrumb.html' with title="Pay Slip" formPage=False showPage=True route=the_url %}
+{% endblock %}
+
+{% block content %}
+
+
+    <div class="content-display clearfix">
+        {% include 'backend/layouts/partials/search.html' %}
+        <div class="panel">
+            <div class="panel-box">
+                <div class="table-responsive mt-3">
+                    <div class="card custom-card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">S.N</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Place</th>
+                                        <th scope="col">Date Range</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for period in pay_periods %}
+                                        <tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{ period.shifts.first.name|title }}</td>
+                                            <td><span
+                                                    class="badge bg-warning">{{ period.shifts.first.workspace|title }}</span>
+                                            </td>
+                                            <td>{{ period.date_range }}</td>
+                                            <td>
+                                                <button class="btn btn-info btn-sm"
+                                                        onclick="loadShiftDetails({{ period.shifts.first.id }})"
+                                                        data-bs-toggle="modal" data-bs-target="#shiftDetailModal">
+                                                    View
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- panel -->
+    </div>
+
+    <!-- Dynamic Modal -->
+    <div class="modal fade" id="shiftDetailModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4">
+                <div class="modal-header bg-light">
+                    <h5 class="modal-title fw-bold" id="shiftModalTitle">Shift Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="shiftModalBody">
+                    <div class="text-center text-muted py-4">Loading...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block newScripts %}
+
+    <script>
+        function loadShiftDetails(id) {
+            const modalBody = document.getElementById('shiftModalBody');
+            modalBody.innerHTML = '<div class="text-center text-muted py-4">Loading...</div>';
+
+            fetch(`/system/shift/data/${id}/`)
+                .then(res => res.json())
+                .then(res => {
+                    if (res.status === 'success') {
+                        const s = res.data;
+                        document.getElementById('shiftModalTitle').innerText = s.name.toUpperCase();
+
+                        // Calculate regular, overtime, etc. if needed
+                        const regularHours = s.hours_worked; // assuming all hours as regular
+                        const overtimeHours = 0;
+                        const doubleTimeHours = 0;
+                        const vacationHours = (s.gross_income > 0) ? (s.vacation_pay / s.hourly_rate).toFixed(2) : 0;
+
+                        modalBody.innerHTML = `
+<div class="paystub-container">
+    <div class="paystub-header">
+        <div class="employee-name">${s.name.toUpperCase()}</div>
+        <div class="header-stats">
+            <div class="stat-item">
+                <div class="stat-label">Regular</div>
+                <div class="stat-value">${regularHours}</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Overtime</div>
+                <div class="stat-value">${overtimeHours}</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Double Time</div>
+                <div class="stat-value">${doubleTimeHours}</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Vacation</div>
+                <div class="stat-value">${vacationHours}</div>
+            </div>
+            <div class="stat-item header-amount">
+                <div class="amount-large">$${s.net_income}</div>
+                <div class="cheque-badge">Cheque</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="paystub-body">
+        <div class="section-title">Gross Income</div>
+        <table class="pay-table">
+            <thead>
+                <tr style="border-bottom: 2px solid #e2e8f0;">
+                    <th>Description</th>
+                    <th style="text-align:center;">Rate</th>
+                    <th style="text-align:right;">Amount</th>
+                    <th style="text-align:right;">Year to Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="item-name">Regular Pay</td>
+                    <td class="item-rate">$${s.hourly_rate}/hour</td>
+                    <td class="item-amount">$${s.gross_income}</td>
+                    <td class="ytd-amount">—</td>
+                </tr>
+                <tr>
+                    <td class="item-name">Vacation Pay</td>
+                    <td class="item-rate">—</td>
+                    <td class="item-amount">$${s.vacation_pay}</td>
+                    <td class="ytd-amount">—</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="section-total">
+            <div class="section-total-row">
+                <span class="section-total-label">Total Gross Income</span>
+                <div>
+                    <span class="section-total-amount">$${s.gross_income}</span>
+                    <span class="ytd-amount">—</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title" style="margin-top: 40px;">Taxes & Deductions</div>
+        <table class="pay-table">
+            <tbody>
+                <tr>
+                    <td class="item-name">Canada Pension Plan</td>
+                    <td class="item-rate">—</td>
+                    <td class="item-amount negative-amount">($${s.cpp_deduction})</td>
+                    <td class="ytd-amount negative-amount">—</td>
+                </tr>
+                <tr>
+                    <td class="item-name">Employment Insurance</td>
+                    <td class="item-rate">—</td>
+                    <td class="item-amount negative-amount">($${s.ei_deduction})</td>
+                    <td class="ytd-amount negative-amount">—</td>
+                </tr>
+                <tr>
+                    <td class="item-name">Tax</td>
+                    <td class="item-rate">—</td>
+                    <td class="item-amount negative-amount">($${s.tax_deduction})</td>
+                    <td class="ytd-amount negative-amount">—</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="section-total">
+            <div class="section-total-row">
+                <span class="section-total-label">Total Deductions</span>
+                <div>
+                    <span class="section-total-amount negative-amount">($${(parseFloat(s.cpp_deduction) + parseFloat(s.ei_deduction) + parseFloat(s.tax_deduction)).toFixed(2)})</span>
+                    <span class="ytd-amount negative-amount">—</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="net-income-section">
+            <div class="net-income-row">
+                <div class="net-income-label">Net Income</div>
+                <div>
+                    <div class="net-income-amount">$${s.net_income}</div>
+                    <div class="net-income-ytd">YTD: —</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-note">
+            <strong>Available vacation:</strong> 0 hours
+        </div>
+    </div>
+</div>
+                `;
+                    } else {
+                        modalBody.innerHTML = `<p class="text-danger">Error: ${res.message}</p>`;
+                    }
+                })
+                .catch(() => {
+                    modalBody.innerHTML = `<p class="text-danger">Unable to load shift details.</p>`;
+                });
+        }
+    </script>
+
+
+{% endblock %}

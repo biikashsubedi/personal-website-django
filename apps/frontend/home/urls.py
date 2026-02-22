@@ -9,4 +9,6 @@ urlpatterns = [
     path('blogs', BlogView.as_view(), name='blogs'),
     path('contact', ContactView.as_view(), name='contact'),
     path('contact-us/store/', store_contact_us, name='store_contact_us'),
+    path('file/', preview_page, name='file'),
+    path('preview-mhtml/', preview_mhtml, name='serve_mhtml_binary'),
 ]
